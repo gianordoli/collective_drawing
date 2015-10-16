@@ -80,8 +80,7 @@ if (!window.DeviceMotionEvent) {
 
     xyz = {
       x: Math.round(event.acceleration.x),
-      y: Math.round(event.acceleration.y),
-      z: Math.round(event.acceleration.z)      
+      y: Math.round(event.acceleration.z)
       // x: Math.round(event.accelerationIncludingGravity.x),
       // y: Math.round(event.accelerationIncludingGravity.y),
       // z: Math.round(event.accelerationIncludingGravity.z)
@@ -89,7 +88,7 @@ if (!window.DeviceMotionEvent) {
       // y: Math.round(event.tiltFrontToBack)
       // z: Math.round(event.acceleration.z)      
     };
-    socket.emit('coordinates', xyz);
+    socket.emit('coordinates', xy);
     
   });
 }
