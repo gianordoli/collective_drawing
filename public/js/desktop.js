@@ -75,8 +75,8 @@ app.main = (function() {
 
   function updatePosition(data) {
 
-    speedX = data.x * 0.5;
-    speedY = data.y * 0.5;
+    speedX = data.x * 0.1;
+    speedY = data.y * 0.1;
     posX += speedX;
     posY += speedY;
 
