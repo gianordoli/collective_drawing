@@ -88,7 +88,7 @@ if (!window.DeviceMotionEvent) {
       // y: Math.round(event.tiltFrontToBack)
       // z: Math.round(event.acceleration.z)      
     };
-    socket.emit('coordinates', xy);
+    socket.emit('coordinates', xyz);
     
   });
 }
