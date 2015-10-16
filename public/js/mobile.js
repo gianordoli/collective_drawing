@@ -10,46 +10,46 @@ socket.on('start', function(data) { //when we get data from socket
 });
 
 
-// check if DeviceOrientationEvent is supported
-if (!window.DeviceOrientationEvent) {
-  document.getElementById('do-unsupported').classList.remove('hidden');
-} else {
-  document.getElementById('do-info').classList.remove('hidden');
+// // check if DeviceOrientationEvent is supported
+// if (!window.DeviceOrientationEvent) {
+//   document.getElementById('do-unsupported').classList.remove('hidden');
+// } else {
+//   document.getElementById('do-info').classList.remove('hidden');
 
-  //listen for event and handle DeviceOrientationEvent object
-  window.addEventListener('deviceorientation', function(event) {
+//   //listen for event and handle DeviceOrientationEvent object
+//   window.addEventListener('deviceorientation', function(event) {
 
-    // gamma is the left-to-right tilt in degrees, where right is positive
-    var tiltLeftToRight = event.gamma;
-    // beta is the front-to-back tilt in degrees, where front is positive
-    var tiltFrontToBack = event.beta;
-    // alpha is the compass direction the device is facing in degrees
-    var direction = event.alpha;
+//     // gamma is the left-to-right tilt in degrees, where right is positive
+//     var tiltLeftToRight = event.gamma;
+//     // beta is the front-to-back tilt in degrees, where front is positive
+//     var tiltFrontToBack = event.beta;
+//     // alpha is the compass direction the device is facing in degrees
+//     var direction = event.alpha;
 
-    // rotate image using CSS3 transform
-    var cube = document.getElementById('cube');
-    cube.style.webkitTransform = 'rotate(' + tiltLeftToRight + 'deg) rotate3d(1,0,0, ' + (tiltFrontToBack * -1) + 'deg)';
-    cube.style.MozTransform = 'rotate(' + tiltLeftToRight + 'deg)';
-    cube.style.transform = 'rotate(' + tiltLeftToRight + 'deg) rotate3d(1,0,0, ' + (tiltFrontToBack * -1) + 'deg)';
+//     // rotate image using CSS3 transform
+//     var cube = document.getElementById('cube');
+//     cube.style.webkitTransform = 'rotate(' + tiltLeftToRight + 'deg) rotate3d(1,0,0, ' + (tiltFrontToBack * -1) + 'deg)';
+//     cube.style.MozTransform = 'rotate(' + tiltLeftToRight + 'deg)';
+//     cube.style.transform = 'rotate(' + tiltLeftToRight + 'deg) rotate3d(1,0,0, ' + (tiltFrontToBack * -1) + 'deg)';
 
-    // set HTML content = tilt OR direction degree (rounded to nearest integer)
-    document.getElementById('doTiltFrontToBack').innerHTML = Math.round(tiltFrontToBack);
-    document.getElementById('doTiltLeftToRight').innerHTML = Math.round(tiltLeftToRight);
-    document.getElementById('doDirection').innerHTML = Math.round(direction);
+//     // set HTML content = tilt OR direction degree (rounded to nearest integer)
+//     document.getElementById('doTiltFrontToBack').innerHTML = Math.round(tiltFrontToBack);
+//     document.getElementById('doTiltLeftToRight').innerHTML = Math.round(tiltLeftToRight);
+//     document.getElementById('doDirection').innerHTML = Math.round(direction);
 
-    document.getElementById('is-absolute').innerHTML = event.absolute ? "true" : "false";
+//     document.getElementById('is-absolute').innerHTML = event.absolute ? "true" : "false";
  
-    xyz = {
-      x: Math.round(tiltLeftToRight),
-      y: Math.round(tiltFrontToBack),
-      z: Math.round(direction)
-    };
-    socket.emit('coordinates', xyz);
+//     xyz = {
+//       x: Math.round(tiltLeftToRight),
+//       y: Math.round(tiltFrontToBack),
+//       z: Math.round(direction)
+//     };
+//     socket.emit('coordinates', xyz);
 
-  });
-}
+//   });
+// }
 
-/*
+
 if (!window.DeviceMotionEvent) {
   document.getElementById('dm-unsupported').classList.remove('hidden');
 } else {
@@ -78,15 +78,15 @@ if (!window.DeviceMotionEvent) {
     // grab refresh interval from the results
     document.getElementById('interval').innerHTML = event.interval;
 
-    // xyz = {
-    //   // x: Math.round(event.accelerationIncludingGravity.x),
-    //   // y: Math.round(event.accelerationIncludingGravity.y),
-    //   // z: Math.round(event.accelerationIncludingGravity.z)
-    //   x: Math.round(event.tiltLeftToRight),
-    //   y: Math.round(event.tiltFrontToBack)
-    //   // z: Math.round(event.acceleration.z)      
-    // };
-    // socket.emit('coordinates', xyz);
+    xyz = {
+      // x: Math.round(event.accelerationIncludingGravity.x),
+      // y: Math.round(event.accelerationIncludingGravity.y),
+      // z: Math.round(event.accelerationIncludingGravity.z)
+      x: Math.round(event.tiltLeftToRight),
+      y: Math.round(event.tiltFrontToBack)
+      // z: Math.round(event.acceleration.z)      
+    };
+    socket.emit('coordinates', xyz);
     
   });
 }
