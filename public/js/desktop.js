@@ -66,8 +66,8 @@ window.addEventListener('DOMContentLoaded', app.main.init);
 
 var canvas = document.getElementById('maze');
 var context = canvas.getContext ('2d');
-var width = 748;
-var height = 500;
+var width = window.innerWidth;
+var height = window.innerHeight;
 
 //positions
 var posX = 20;
@@ -119,97 +119,9 @@ if (canvas.getContext) {
       context.arc(posX, posY, radius, 0, 2*Math.PI);
       context.fillStyle = colorCirlce;
       context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(188, 94, 0, 0);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(370,73,0, 0);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(233, 218, 0, 0);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(70, 0, 668, 57);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(70, 110, 70, 389);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(194, 42, 115, 215);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(140, 314, 232, 83);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(372, 115, 57, 222);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(372, 115, 276, 57);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(708, 42, 40, 457);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(489, 230, 219, 54);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(372, 337, 274, 60);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(0, 177, 70, 322);
-  context.fillStyle = color;
-  context.fill();
-
-  //rect
-  context.beginPath();
-  context.rect(257, 459, 451, 40);
-  context.fillStyle = color;
-  context.fill();
-
-
-  } 
-
-        else {
-          document.write ("Update your browser. Sheesh");
-        }
-      };
+  }else{
+    document.write ("Your browser doesn't support canvas :S");
+  }
+};
 
 
