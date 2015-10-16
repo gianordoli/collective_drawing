@@ -66,22 +66,16 @@ window.addEventListener('DOMContentLoaded', app.main.init);
 
 var canvas = document.getElementById('maze');
 var context = canvas.getContext ('2d');
-canvas.style.width = window.innerWidth;
-canvas.style.height = window.innerHeight;
+canvas.style.width = window.innerWidth + 'px';
+canvas.style.height = window.innerHeight + 'px';
 
 //positions
 var posX = 20;
 var posY = 79;
-var radius = 12;
-var direction = Math.PI * 2 * Math.random();
-
- //speed
 var speedX = 0;
 var speedY = 0;
-
-//setting interval
-var counter = 0;
-setInterval(draw, 100,60);
+var radius = 12;
+var direction;
 
 function updatePosition(data) {
   speedX = data.x * 0.1;
@@ -103,16 +97,14 @@ function updatePosition(data) {
 
 function draw() {
 
+  if (canvas.getContext) { 
 
-if (canvas.getContext) { 
+    context.fillStyle = 'rgba(255, 255, 255, .05)';
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
-  context.fillStyle = 'rgba(255, 255, 255, .05)';
-  context.fillRect(0, 0, canvas.width, canvas.height);
-
-  //colors
-  var color = 'rgba(250, 146, 146, 1)';
-  var colorCirlce = 'rgba(29, 104, 255, 1)';
-
+    //colors
+    var color = 'rgba(250, 146, 146, 1)';
+    var colorCirlce = 'rgba(29, 104, 255, 1)';
 
   /// cirlce draw
       context.beginPath();
@@ -123,5 +115,3 @@ if (canvas.getContext) {
     document.write ("Your browser doesn't support canvas :S");
   }
 };
-
-
