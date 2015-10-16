@@ -66,8 +66,10 @@ window.addEventListener('DOMContentLoaded', app.main.init);
 
 var canvas = document.getElementById('maze');
 var context = canvas.getContext ('2d');
-canvas.style.width = window.innerWidth + 'px';
-canvas.style.height = window.innerHeight + 'px';
+var width = window.innerWidth;
+var height = window.innerHeight;
+canvas.style.width = width + 'px';
+canvas.style.height = height + 'px';
 
 //positions
 var posX = 20;
