@@ -1,4 +1,83 @@
-console.log('hey');
+var app = app || {};
+
+app.main = (function() {
+  console.log('Your code starts here!');
+
+  var socket;
+
+  // Initializing socket and adding listener functions
+  var socketSetup = function(callback){
+    
+    // Connect
+      socket = io.connect();
+
+      socket.on('coordinates-from-user', function(data) {
+        // console.log(data);
+
+        speedX = data.x * 0.1;
+        speedY = data.y * 0.1;
+        updatePosition();
+        colorDetection();
+      });      
+
+    // Listeners
+    // socket.on('welcome', function(data){
+    //   // console.log(data.msg);
+    //   // console.log(data.users);
+    //   for(var id in data.users){
+    //     addBall({
+    //       id: id,
+    //           color: data.users[id]['color'],
+    //           top: data.users[id]['top'],
+    //           left: data.users[id]['left']          
+    //     });
+    //   }
+    // });
+
+    // socket.on('add-ball', function(data){
+    //   addBall(data);
+    // });
+    
+    // socket.on('remove-ball', function(data){
+    //   if(ballExists(data.id)){
+    //     removeBall(data);
+    //   }
+    // });
+
+    // // Listen again, this time to render
+    // socket.on('render', function(data){
+    //   // console.log(data);
+    //   // If a ball with this ID hasn't been rendered yet, let's add it
+    //   if(!ballExists(data.id)){
+    //     addBall(data);
+    //   }
+    //   moveBall(data);
+    // });     
+  };
+
+  var init = function(){
+    console.log('Initializing app.');
+    socketSetup();
+  };
+
+  return {
+    init: init
+  };
+
+})();
+
+window.addEventListener('DOMContentLoaded', app.main.init);
+
+// // Socket.io connection
+// var socket = io.connect(); //socket to listen to app
+// socket.on('coordinates-from-user', function(data) {
+//   // console.log(data);
+
+//   speedX = data.x * 0.1;
+//   speedY = data.y * 0.1;
+//   updatePosition();
+//   colorDetection();
+// });
 
 // var x = 0;
 // var y = 0;
@@ -66,17 +145,6 @@ function colorDetection(){
  //setting interval
   var counter = 0;
   setInterval(draw, 100,60);
-
-// Socket.io connection
-var socket = io.connect(); //socket to listen to app
-socket.on('coordinates-from-user', function(data) {
-  // console.log(data);
-
-  speedX = data.x * 0.1;
-  speedY = data.y * 0.1;
-  updatePosition();
-  colorDetection();
- });
 
 function updatePosition() {
 
