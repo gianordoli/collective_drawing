@@ -13,12 +13,8 @@ app.main = (function() {
 
       socket.on('coordinates-from-user', function(data) {
         // console.log(data);
-
-        speedX = data.x * 0.1;
-        speedY = data.y * 0.1;
-        updatePosition();
-        colorDetection();
-      });      
+        updatePosition(data);
+      });
 
     // Listeners
     // socket.on('welcome', function(data){
@@ -68,86 +64,28 @@ app.main = (function() {
 
 window.addEventListener('DOMContentLoaded', app.main.init);
 
-// // Socket.io connection
-// var socket = io.connect(); //socket to listen to app
-// socket.on('coordinates-from-user', function(data) {
-//   // console.log(data);
-
-//   speedX = data.x * 0.1;
-//   speedY = data.y * 0.1;
-//   updatePosition();
-//   colorDetection();
-// });
-
-// var x = 0;
-// var y = 0;
 var canvas = document.getElementById('maze');
 var context = canvas.getContext ('2d');
 var width = 748;
 var height = 500;
 
-
-// //cirlce
-// 	var centerX = 20;
-//     var centerY = 79;
-   var radius = 12;
-
 //positions
-    posX = 20;
-    posY = 79;
-    direction = Math.PI * 2 * Math.random();
-    
-
-//colorDetection 
-function colorDetection(){
-
-  var xn = posX-radius;
-  var yn = posY-radius;
-
-  // console.log(xn);
-
-  var pixelData = context.getImageData(xn, yn, 2*radius, 2*radius);
-  // console.log('xn:' + xn);
-  // console.log('yn:' + xn);
-  // console.log('2*radius:' + 2*radius);
-  // console.log(pixelData[0]);
-
-  // iterate over all pixels based on x and y coordinates
-  for(var y = 0; y < 2*radius; y++) {
-    // loop through each column
-    for(var x = 0; x < 2*radius; x++) {
-      var red = pixelData.data[((2*radius * y) + x) * 4];
-      var green = pixelData.data[((2*radius * y) + x) * 4 + 1];
-      var blue = pixelData.data[((2*radius * y) + x) * 4 + 2];
-      var alpha = pixelData.data[((2*radius * y) + x) * 4 + 3];
-
-      if( red < 255 && blue < 255){
-        console.log('DEAD');
-        /*
-        if(!alert('Alert For your User!')){
-          window.location.reload();
-        }       
-        */
-        break
-      }
-
-    }
-  }  
-
-}
-
+var posX = 20;
+var posY = 79;
+var radius = 12;
+var direction = Math.PI * 2 * Math.random();
 
  //speed
- 	var speedX = 0;
-    var speedY = 0;
+var speedX = 0;
+var speedY = 0;
 
+//setting interval
+var counter = 0;
+setInterval(draw, 100,60);
 
- //setting interval
-  var counter = 0;
-  setInterval(draw, 100,60);
-
-function updatePosition() {
-
+function updatePosition(data) {
+  speedX = data.x * 0.1;
+  speedY = data.y * 0.1;
   posX += speedX;
   posY += speedY;
   if (posX < 0){
@@ -181,11 +119,6 @@ if (canvas.getContext) {
       context.arc(posX, posY, radius, 0, 2*Math.PI);
       context.fillStyle = colorCirlce;
       context.fill();
-    
-  // //stop movement
-  // if(posX >= canvas.width -width || posX<=0 ) speedX= 0;
-  // if(posY >= canvas.width -width || posY<=0 ) speedY= 0;
-
 
   //rect
   context.beginPath();
