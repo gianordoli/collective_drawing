@@ -40,9 +40,11 @@ if (!window.DeviceOrientationEvent) {
     document.getElementById('is-absolute').innerHTML = event.absolute ? "true" : "false";
  
     xyz = {
-      x: Math.round(tiltLeftToRight),
-      y: Math.round(tiltFrontToBack)
-    // z: Math.round(direction)
+      // x: Math.round(tiltLeftToRight),
+      // y: Math.round(tiltFrontToBack),
+      // z: Math.round(direction)
+      x: Math.round(direction),
+      y: -Math.round(tiltFrontToBack)
     };
     socket.emit('coordinates', xyz);
 
