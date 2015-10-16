@@ -70,15 +70,13 @@ io.on('connection', function(socket) {
       z: data.z
     });
   });
-
-  /*
-    // A listener for socket disconnection
-    socket.on('disconnect', function() {
-        console.log(socket.id + ' just disconnected');
-        io.sockets.emit('global message', socket.id + ' just disconnected');
-        removeUser(socket.id);
-    });
-    */
+  
+  socket.on('disconnect', function() {
+      console.log(socket.id + ' just disconnected');
+      io.sockets.emit('global message', socket.id + ' just disconnected');
+      removeUser(socket.id);
+  });
+    
 });
 
 function addUser(user) {
