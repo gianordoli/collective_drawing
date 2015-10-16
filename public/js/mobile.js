@@ -79,11 +79,14 @@ if (!window.DeviceMotionEvent) {
     document.getElementById('interval').innerHTML = event.interval;
 
     xyz = {
+      x: Math.round(event.acceleration.x),
+      y: Math.round(event.acceleration.y),
+      z: Math.round(event.acceleration.z)      
       // x: Math.round(event.accelerationIncludingGravity.x),
       // y: Math.round(event.accelerationIncludingGravity.y),
       // z: Math.round(event.accelerationIncludingGravity.z)
-      x: Math.round(event.tiltLeftToRight),
-      y: Math.round(event.tiltFrontToBack)
+      // x: Math.round(event.tiltLeftToRight),
+      // y: Math.round(event.tiltFrontToBack)
       // z: Math.round(event.acceleration.z)      
     };
     socket.emit('coordinates', xyz);
