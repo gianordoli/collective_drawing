@@ -75,6 +75,8 @@ app.main = (function() {
 
   function updatePosition(data) {
 
+    data.x = map(data.x, 360, 180, -90, 90);
+
     speedX = data.x * 0.1;
     speedY = data.y * 0.1;
     posX += speedX;
@@ -106,6 +108,13 @@ app.main = (function() {
     context.arc(posX, posY, radius, 0, 2*Math.PI);
     context.fillStyle = 'rgba(29, 104, 255, 1)';
     context.fill();
+  };
+
+  var map = function(value, aMin, aMax, bMin, bMax){
+      var srcMax = aMax - aMin,
+        dstMax = bMax - bMin,
+        adjValue = value - aMin;
+      return (adjValue * dstMax / srcMax) + bMin;
   };
 
   var init = function(){
