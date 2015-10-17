@@ -90,11 +90,11 @@ app.main = (function() {
     cube.style.MozTransform = 'rotate(' + tiltLeftToRight + 'deg)';
     cube.style.transform = 'rotate(' + tiltLeftToRight + 'deg) rotate3d(1,0,0, ' + (tiltFrontToBack * -1) + 'deg)';
 
-    // set HTML content = tilt OR direction degree (rounded to nearest integer)
-    document.getElementById('doTiltFrontToBack').innerHTML = Math.round(tiltFrontToBack);
-    document.getElementById('doTiltLeftToRight').innerHTML = Math.round(tiltLeftToRight);
-    document.getElementById('doDirection').innerHTML = Math.round(direction);
-    document.getElementById('is-absolute').innerHTML = event.absolute ? "true" : "false";
+    // // set HTML content = tilt OR direction degree (rounded to nearest integer)
+    // document.getElementById('doTiltFrontToBack').innerHTML = Math.round(tiltFrontToBack);
+    // document.getElementById('doTiltLeftToRight').innerHTML = Math.round(tiltLeftToRight);
+    // document.getElementById('doDirection').innerHTML = Math.round(direction);
+    // document.getElementById('is-absolute').innerHTML = event.absolute ? "true" : "false";
   }
 
   var init = function(){
