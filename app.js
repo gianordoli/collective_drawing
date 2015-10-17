@@ -51,7 +51,7 @@ io.on('connection', function(socket) {
   });
 
   // Listening for coordinates
-  socket.on('coordinates', function(data) {
+  socket.on('orientation', function(data) {
     // console.log('has sent: ' + socket.id, data);
     updateUser(socket.id, data);
   });
