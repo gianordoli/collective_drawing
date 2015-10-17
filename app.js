@@ -100,10 +100,11 @@ function updateUser(id, data){
     
     // var offsetX = users[id]['offset']['x'];
 
-    console.log('original:\t' + data.x);
+    console.log('in:\t' + data.x);
     if(data.x > 180){
-      data.x = 360 - data.x;
+      data.x = data.x - 360;
     }
+    console.log('out:\t' + data.x);
 
     // var constrainedX;
     // if(offsetX + 90 < data.x && data.x <= offsetX + 180){
@@ -122,7 +123,8 @@ function updateUser(id, data){
     //   targetX = 360 - constrainedX + offsetX;
     // }
     // console.log('target:\t' + targetX);
-
+    data.x = map(data.x, 180, -180, -90, 90);
+    console.log('map:\t' + data.x);
     var speed = {
       x: data.x * 0.1,
       y: data.y * 0.1
