@@ -42,16 +42,9 @@ app.main = (function() {
         document.getElementById('doTiltFrontToBack').innerHTML = Math.round(tiltFrontToBack);
         document.getElementById('doTiltLeftToRight').innerHTML = Math.round(tiltLeftToRight);
         document.getElementById('doDirection').innerHTML = Math.round(direction);
-
         document.getElementById('is-absolute').innerHTML = event.absolute ? "true" : "false";
      
-        // coordinates = {
-        //   // x: Math.round(tiltLeftToRight),
-        //   // y: Math.round(tiltFrontToBack),
-        //   // z: Math.round(direction)
-        //   x: Math.round(direction),
-        //   y: -Math.round(tiltFrontToBack)
-        // };
+
         socket.emit('coordinates', {
           x: Math.round(direction),
           y: -Math.round(tiltFrontToBack)

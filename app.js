@@ -35,17 +35,12 @@ server.listen(port, function() {
 });
 
 var users = {};
+var loop;
 
 //Assign function to 'connection' event for the connected socket
 io.on('connection', function(socket) {
+
   /*––––––––––– SOCKET.IO starts here –––––––––––––––*/
-
-  /*
-	.on
-	.emit
-	.broadcast
-
-    */
   // When Browser connects to socket: (whenever connection event fires)
   // EMIT 'start' event to connected socket
   socket.emit('start', {
@@ -62,15 +57,6 @@ io.on('connection', function(socket) {
     //console.log(socket.id + ' has sent: ' + data);
     console.log('has sent: ', socket.id, data);
     updateUser(socket.id, data);
-    // Emit coordinates to every clients (all players)
-    io.sockets.emit('render', { // Update position on client
-        id: socket.id,
-        color: users[socket.id]['color'],
-        pos: {
-          x: users[socket.id]['pos']['x'],
-          y: users[socket.id]['pos']['y']
-        }
-    });
   });
   
   socket.on('disconnect', function() {
@@ -78,8 +64,18 @@ io.on('connection', function(socket) {
       io.sockets.emit('global message', socket.id + ' just disconnected');
       removeUser(socket.id);
   });
-    
+
+  // 
+  if(Object.keys(users).length === 1){
+    loop = setInterval(renderOnClient(io), 500);
+  }
 });
+
+function renderOnClient(io){
+  console.log('Called renderOnClient');
+  // Emit coordinates to every clients (all players)
+  io.sockets.emit('render', users);
+}
 
 function updateUser(id, data){
 
