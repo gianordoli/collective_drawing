@@ -100,9 +100,8 @@ function updateUserPosition(id, data){
   if(users.hasOwnProperty(id)) {
     console.log('in:\t' + data.orientation.x);
 
-    var offsetX = users[id]['offset']['x'];
-    data.orientation.x -= offsetX;
-    console.log('offset:\t' + offsetX);    
+    data.orientation.x -= users[id]['offset']['x'];
+    console.log('offset:\t' + users[id]['offset']['x']);    
     console.log('relative:\t' + data.orientation.x);
     
     if(data.orientation.x > 180){
@@ -112,6 +111,9 @@ function updateUserPosition(id, data){
 
     data.orientation.x = map(data.orientation.x, 180, -180, -90, 90);
     console.log('map:\t' + data.orientation.x);
+
+    data.orientation.y -= users[id]['offset']['y'];
+
     var speed = {
       x: data.orientation.x * 0.1,
       y: data.orientation.y * 0.1
