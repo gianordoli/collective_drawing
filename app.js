@@ -86,13 +86,33 @@ function calibrateUser(id, data){
       x: data.x,
       y: data.y
     }
-  }
+    if(Object.keys(users).length === 1){
+      loop = setInterval(function(){
+        renderOnClient(io);
+      }, 100);
+    }    
+  }  
 }
 
 function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
-    data.x = data.x + (90 - users[id]['offset']['x']);
+    
+    // Constrain
+    if(90 < data.x && data.x < 180){
+      data.x = 90;
+    }else if(180 < data.x && data.x < 270){
+      data.x = 270;
+    }
+    
+    // Offset
+    data.x += 90;
+    
+    // Trim
+    data.x = (data.x > 360) ? (data.x - 360) : (data.x);
+    // data.x = data.x + (90 - users[id]['offset']['x']);
+
+    // Map
     data.x = map(data.x, 180, 0, -90, 90);
     if(data.x < -90){ data.x = -90 };
     if(data.x >  90){ data.x =  90 };
@@ -128,11 +148,6 @@ function addUser(id) {
       }
   }
   console.log('current users: ' + Object.keys(users).length);
-  if(Object.keys(users).length === 1){
-    loop = setInterval(function(){
-      renderOnClient(io);
-    }, 100);
-  }
 }
 
 function removeUser(id) {
