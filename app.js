@@ -110,7 +110,7 @@ function updateUser(id, data){
     }else{
       constrainedX = data.x;
     }
-    console.log('constrained:' + constrainedX);
+    console.log('constrained:\t' + constrainedX);
 
     var targetX;
     if(offsetX <= constrainedX && constrainedX <= offsetX + 90){
@@ -118,6 +118,7 @@ function updateUser(id, data){
     }else if(offsetX + 270 <= constrainedX && constrainedX <= offsetX + 360){
       targetX = 360 - constrainedX + offsetX;
     }
+    console.log('target:\t' + targetX);
 
     var speed = {
       x: targetX * 0.1,
