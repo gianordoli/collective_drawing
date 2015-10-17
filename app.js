@@ -100,7 +100,7 @@ function updateUser(id, data){
     console.log('in:\t' + data.x);
 
     var offsetX = users[id]['offset']['x'];
-    data.x += offsetX;
+    data.x -= offsetX;
     console.log('offset:\t' + data.x);
     
     if(data.x > 180){
