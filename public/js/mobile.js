@@ -39,17 +39,17 @@ app.main = (function() {
     }
   }
 
-  var getOrientation(){
+  var getOrientation = function(){
     var tiltFrontToBack = event.beta;
     var direction = event.alpha;
     return {x: direction, y: tiltFrontToBack};
   }
 
-  var emitOrientation(){
+  var emitOrientation = function(){
     socket.emit('orientation', orientation);    
   }
 
-  var displayOrientation(){
+  var displayOrientation = function(){
       // rotate image using CSS3 transform
       var cube = document.getElementById('cube');
       cube.style.webkitTransform = 'rotate(' + tiltLeftToRight + 'deg) rotate3d(1,0,0, ' + (tiltFrontToBack * -1) + 'deg)';
