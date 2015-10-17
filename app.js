@@ -37,7 +37,8 @@ var loop;
 io.on('connection', function(socket) {
 
   /*––––––––––– SOCKET.IO starts here –––––––––––––––*/
-  console.log('A new client has connected: ' + socket.id);  
+  console.log('SOCKET: connection');
+  console.log('A new client has connected: ' + socket.id);
   socket.emit('welcome', {
       msg: 'Welcome! your id is ' + socket.id,
       users: users
@@ -46,35 +47,40 @@ io.on('connection', function(socket) {
   //Our event handlers
   // Is this coming from a mobile device?
   socket.on('add-me', function(data) {
+    console.log('SOCKET: add-me');
     console.log(data);
     addUser(socket.id);
   });
 
   socket.on('calibrate', function(data) {
+    console.log('SOCKET: calibrate');
     console.log(data);
     calibrateUser(socket.id, data);
   });  
 
   // Listening for coordinates
   socket.on('orientation', function(data) {
-    console.log('has sent: ' + socket.id, data);
+    console.log('SOCKET: orientation');
+    // console.log('has sent: ' + socket.id, data);
     updateUser(socket.id, data);
   });
   
   socket.on('disconnect', function() {
-      console.log(socket.id + ' just disconnected');
-      io.sockets.emit('global message', socket.id + ' just disconnected');
-      removeUser(socket.id);
+    console.log('SOCKET: disconnect');
+    console.log(socket.id + ' just disconnected');
+    io.sockets.emit('global message', socket.id + ' just disconnected');
+    removeUser(socket.id);
   });
 });
 
 function renderOnClient(io){
-  // console.log('Called renderOnClient');
+  // console.log('FUNCTION: renderOnClient');
   // Emit coordinates to every clients (all players)
   io.sockets.emit('render', users);
 }
 
 function calibrateUser(id, data){
+  console.log('FUNCTION: calibrateUser');
   if(users.hasOwnProperty(id)){
     users[id]['offset'] = {
       x: data.x,
@@ -84,6 +90,7 @@ function calibrateUser(id, data){
 }
 
 function updateUser(id, data){
+  console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
     data.x = map(data.x, 360, 180, -90, 90);
 
@@ -103,36 +110,38 @@ function updateUser(id, data){
 }
 
 function addUser(id) {
-    if(!users.hasOwnProperty(id)) {
-        users[id] = {
-            color: 'hsla(' + Math.round(Math.random()*360) + ', 100%, 50%, 0.75)',
-            pos: {
-              x: 50,
-              y: 50
-            }
-        }
-    }
-    console.log('current users: ' + Object.keys(users).length);
-    if(Object.keys(users).length === 1){
-      loop = setInterval(function(){
-        renderOnClient(io);
-      }, 100);
-    }    
+  console.log('FUNCTION: addUser');
+  if(!users.hasOwnProperty(id)) {
+      users[id] = {
+          color: 'hsla(' + Math.round(Math.random()*360) + ', 100%, 50%, 0.75)',
+          pos: {
+            x: 50,
+            y: 50
+          }
+      }
+  }
+  console.log('current users: ' + Object.keys(users).length);
+  if(Object.keys(users).length === 1){
+    loop = setInterval(function(){
+      renderOnClient(io);
+    }, 100);
+  }
 }
 
 function removeUser(id) {
-    if(users.hasOwnProperty(id)) {
-        delete users[id]
-    }
-    console.log('current users: ' + Object.keys(users).length);
-    if(Object.keys(users).length === 0){
-      clearInterval(loop);
-    }    
+  console.log('FUNCTION: removeUser');
+  if(users.hasOwnProperty(id)) {
+      delete users[id]
+  }
+  console.log('current users: ' + Object.keys(users).length);
+  if(Object.keys(users).length === 0){
+    clearInterval(loop);
+  }
 }
 
 var map = function(value, aMin, aMax, bMin, bMax){
     var srcMax = aMax - aMin,
-      dstMax = bMax - bMin,
+        dstMax = bMax - bMin,
       adjValue = value - aMin;
     return (adjValue * dstMax / srcMax) + bMin;
 };
