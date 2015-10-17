@@ -101,7 +101,7 @@ function updateUserPosition(id, data){
     console.log('in:\t' + data.orientation.x);
 
     data.orientation.x -= users[id]['offset']['x'];
-    console.log('offset:\t' + users[id]['offset']['x']);    
+    console.log('offset:\t' + users[id]['offset']['x']); 
     console.log('relative:\t' + data.orientation.x);
     
     if(data.orientation.x > 180){
@@ -109,8 +109,17 @@ function updateUserPosition(id, data){
     }
     console.log('out:\t' + data.orientation.x);
 
+    if(90 < data.x && data.x < 180){
+      data.x = 90;
+    }else if(-90 > data.x && data.x > -180){
+      data.x = -90;
+    }
+    console.log('trim:\t' + data.orientation.x);
+
     data.orientation.x = Math.round(map(data.orientation.x, 180, -180, -90, 90));
     console.log('map:\t' + data.orientation.x);
+
+
 
     data.orientation.y -= users[id]['offset']['y'];
 
