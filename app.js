@@ -37,7 +37,7 @@ var loop;
 io.on('connection', function(socket) {
 
   /*––––––––––– SOCKET.IO starts here –––––––––––––––*/
-  console.log('A new user has connected: ' + socket.id);  
+  console.log('A new client has connected: ' + socket.id);  
   socket.emit('welcome', {
       msg: 'Welcome! your id is ' + socket.id,
       users: users
@@ -107,6 +107,9 @@ function removeUser(id) {
         delete users[id]
     }
     console.log('current users: ' + Object.keys(users).length);
+    if(Object.keys(users).length === 0){
+      clearInterval(loop);
+    }    
 }
 
 var map = function(value, aMin, aMax, bMin, bMax){
