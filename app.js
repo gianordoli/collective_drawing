@@ -96,7 +96,7 @@ function addUser(id) {
     if(Object.keys(users).length === 1){
       loop = setInterval(function(){
         renderOnClient(io);
-      }, 500);
+      }, 100);
     }    
 }
 
