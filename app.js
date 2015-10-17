@@ -78,7 +78,13 @@ function updateUser(id, data){
       y: data.y * 0.1
     }
     users[id]['pos']['x'] += speed.x;
+    if(users[id]['pos']['x'] < 0){
+      users[id]['pos']['x'] = 0;
+    }
     users[id]['pos']['y'] += speed.y;
+    if(users[id]['pos']['y'] < 0){
+      users[id]['pos']['y'] = 0;
+    }    
   }
 }
 

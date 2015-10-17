@@ -42,7 +42,7 @@ app.main = (function() {
   var getOrientation = function(){
     var tiltFrontToBack = event.beta;
     var direction = event.alpha;
-    return {x: direction, y: tiltFrontToBack};
+    return {x: direction, y: -tiltFrontToBack};
   }
 
   var emitOrientation = function(){
