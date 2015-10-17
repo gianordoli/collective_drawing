@@ -98,30 +98,33 @@ function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
     
-    var offsetX = users[id]['offset']['x'];
+    // var offsetX = users[id]['offset']['x'];
 
     console.log('original:\t' + data.x);
-
-    var constrainedX;
-    if(offsetX + 90 < data.x && data.x <= offsetX + 180){
-      constrainedX = offsetX + 90;
-    }else if(offsetX + 180 < data.x && data.x < offsetX + 270){
-      constrainedX = offsetX + 270;
-    }else{
-      constrainedX = data.x;
+    if(data.x > 180){
+      data.x = 360 - data.x;
     }
-    console.log('constrained:\t' + constrainedX);
 
-    var targetX;
-    if(offsetX <= constrainedX && constrainedX <= offsetX + 90){
-      targetX = offsetX - constrainedX;
-    }else if(offsetX + 270 <= constrainedX && constrainedX <= offsetX + 360){
-      targetX = 360 - constrainedX + offsetX;
-    }
-    console.log('target:\t' + targetX);
+    // var constrainedX;
+    // if(offsetX + 90 < data.x && data.x <= offsetX + 180){
+    //   constrainedX = offsetX + 90;
+    // }else if(offsetX + 180 < data.x && data.x < offsetX + 270){
+    //   constrainedX = offsetX + 270;
+    // }else{
+    //   constrainedX = data.x;
+    // }
+    // console.log('constrained:\t' + constrainedX);
+
+    // var targetX;
+    // if(offsetX <= constrainedX && constrainedX <= offsetX + 90){
+    //   targetX = offsetX - constrainedX;
+    // }else if(offsetX + 270 <= constrainedX && constrainedX <= offsetX + 360){
+    //   targetX = 360 - constrainedX + offsetX;
+    // }
+    // console.log('target:\t' + targetX);
 
     var speed = {
-      x: targetX * 0.1,
+      x: data.x * 0.1,
       y: data.y * 0.1
     }
     users[id]['pos']['x'] += speed.x;
