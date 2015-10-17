@@ -103,7 +103,7 @@ function updateUserPosition(id, data){
   if(users.hasOwnProperty(id)) {
     console.log('in:\t' + data.orientation.x);
 
-    data.orientation.x = Math.abs(data.orientation.x - users[id]['offset']['x']);
+    data.orientation.x = data.orientation.x - users[id]['offset']['x'];
     console.log('offset:\t' + users[id]['offset']['x']); 
     console.log('relative:\t' + data.orientation.x);
     
