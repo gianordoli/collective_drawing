@@ -97,10 +97,12 @@ function calibrateUser(id, data){
 function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
-    
-    // var offsetX = users[id]['offset']['x'];
-
     console.log('in:\t' + data.x);
+
+    var offsetX = users[id]['offset']['x'];
+    data.x += offsetX;
+    console.log('offset:\t' + data.x);
+    
     if(data.x > 180){
       data.x = data.x - 360;
     }
