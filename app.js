@@ -92,7 +92,10 @@ function calibrateUser(id, data){
 function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
-    data.x = map(data.x, 360, 180, -90, 90);
+    data.x = data.x + (90 - offset.x);
+    data.x = map(data.x, 180, 0, -90, 90);
+    if(data.x < -90){ data.x = -90 };
+    if(data.x >  90){ data.x =  90 };
 
     var speed = {
       x: data.x * 0.1,
