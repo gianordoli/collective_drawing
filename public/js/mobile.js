@@ -30,8 +30,6 @@ app.main = (function() {
     el.addEventListener("touchstart", handleStart, false);
     el.addEventListener("touchend", handleEnd, false);
     el.addEventListener("touchcancel", handleEnd, false);
-    // el.addEventListener("touchmove", handleMove, false);
-    log("initialized.");    
 
     // check if DeviceOrientationEvent is supported
     if (!window.DeviceOrientationEvent) {
