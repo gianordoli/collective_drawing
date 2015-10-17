@@ -15,8 +15,7 @@ app.main = (function() {
       console.log(data.msg);
     });
     socket.on('render', function(data) {
-      console.log(data);
-      // updatePosition(data);
+      // console.log(data);
       draw(data);
     });
   };
@@ -41,6 +40,8 @@ app.main = (function() {
     // context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){
+      console.log(data[user]['pos']['x']);
+      console.log(data[user][color]);
       // Circle
       context.beginPath();
       context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);
