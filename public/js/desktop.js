@@ -40,11 +40,13 @@ app.main = (function() {
     // context.fillStyle = 'rgba(255, 255, 255, .05)';
     // context.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Circle
-    context.beginPath();
-    context.arc(data['pos']['x'], data['pos']['y'], 5, 0, 2*Math.PI);
-    context.fillStyle = data['color'];
-    context.fill();
+    for(var user in data){
+      // Circle
+      context.beginPath();
+      context.arc(user['pos']['x'], user['pos']['y'], 5, 0, 2*Math.PI);
+      context.fillStyle = user['color'];
+      context.fill();
+    }
   };
 
   var init = function(){
