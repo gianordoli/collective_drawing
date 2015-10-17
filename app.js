@@ -99,7 +99,9 @@ function updateUser(id, data){
   if(users.hasOwnProperty(id)) {
     console.log('in:' + data.x);
 
-    data.x = (data.x + 90 >= 360) ? (data.x + 90 - 360) : (data.x + 90);
+    var offsetX = data[id]['offset']['x'];
+
+    data.x = (data.x + 90 - offsetX >= 360) ? (data.x + 90 - offsetX - 360) : (data.x + 90 - offsetX);
     console.log('out:' + data.x);
 
     // Constrain
