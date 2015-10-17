@@ -77,7 +77,7 @@ function renderOnClient(io){
 function calibrateUser(id, data){
   if(users.hasOwnProperty(id)){
     users[id]['offset'] = {
-      x: data.x;
+      x: data.x,
       y: data.y
     }
   }
