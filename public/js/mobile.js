@@ -53,8 +53,6 @@ app.main = (function() {
   function handleStart(evt) {
     evt.preventDefault();
     console.log("touchstart.");
-    console.log('calibrate');
-    socket.emit('calibrate', orientation);
     isDrawing = true;
   };
 
