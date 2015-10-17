@@ -170,10 +170,12 @@ function removeUser(id) {
     clearInterval(loop);
   }
 }
-
-var map = function(value, aMin, aMax, bMin, bMax){
-    var srcMax = aMax - aMin,
-        dstMax = bMax - bMin,
-      adjValue = value - aMin;
-    return (adjValue * dstMax / srcMax) + bMin;
+var map = function (n, start1, stop1, start2, stop2) {
+  return (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
 };
+// var map = function(value, aMin, aMax, bMin, bMax){
+//     var srcMax = aMax - aMin,
+//         dstMax = bMax - bMin,
+//       adjValue = value - aMin;
+//     return (adjValue * dstMax / srcMax) + bMin;
+// };
