@@ -67,7 +67,9 @@ io.on('connection', function(socket) {
 
   // 
   if(Object.keys(users).length === 1){
-    loop = setInterval(renderOnClient(io), 500);
+    loop = setInterval(function(){
+      renderOnClient(io);
+    }, 500);
   }
 });
 
