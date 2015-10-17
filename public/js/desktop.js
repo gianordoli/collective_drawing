@@ -15,7 +15,7 @@ app.main = (function() {
       console.log(data.msg);
     });
     socket.on('render', function(data) {
-      // console.log(data);
+      console.log(data);
       // updatePosition(data);
       draw(data);
     });
