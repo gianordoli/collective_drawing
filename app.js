@@ -92,7 +92,7 @@ function calibrateUser(id, data){
 function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
-    data.x = data.x + (90 - users[i]['offset']['x']);
+    data.x = data.x + (90 - users[id]['offset']['x']);
     data.x = map(data.x, 180, 0, -90, 90);
     if(data.x < -90){ data.x = -90 };
     if(data.x >  90){ data.x =  90 };
