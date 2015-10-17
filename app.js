@@ -52,7 +52,7 @@ io.on('connection', function(socket) {
 
   // Listening for coordinates
   socket.on('coordinates', function(data) {
-    console.log('has sent: ' + socket.id, data);
+    // console.log('has sent: ' + socket.id, data);
     updateUser(socket.id, data);
   });
   
