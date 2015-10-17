@@ -38,7 +38,7 @@ app.main = (function() {
   function draw(data) {
 
     // Background
-    context.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    context.fillStyle = 'rgba(0, 0, 0, 0.02)';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){
