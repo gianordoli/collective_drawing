@@ -15,6 +15,11 @@ app.main = (function() {
       console.log('SOCKET: welcome');
       console.log(data.msg);
     });
+
+    // socket.on('add-user', function(data){
+    //   addUser(data);
+    // });
+
     socket.on('render', function(data) {
       // console.log(data);
       draw(data);
@@ -34,11 +39,25 @@ app.main = (function() {
     }
   };
 
+  // function addUser(newUser) {
+  //   console.log('FUNCTION: addUser');
+  //   if(!users.hasOwnProperty(newUser['id'])) {
+  //     users[id] = newUser;
+  //   }
+  // }
+
+  // function update(data){
+  //   for(var user in data){
+  //     if(data[user]['isDrawing']){
+  //     }
+  //   }
+  // }
+
   function draw(data) {
 
     // Background
-    // context.fillStyle = 'rgba(255, 255, 255, .05)';
-    // context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = '#000';
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){
       console.log(data[user]['pos']['x']);
