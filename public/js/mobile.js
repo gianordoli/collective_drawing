@@ -7,11 +7,12 @@ app.main = (function() {
   // Initializing socket and adding listener functions
   var socketSetup = function(callback){
       socket = io.connect();
-      socket.emit('add-me', 'I\'m mobile!');
+
       // Assigning function to the 'start' event on that socket
-      socket.on('start', function(data) { //when we get data from socket
+      socket.on('welcome', function(data) { //when we get data from socket
         console.log('User is ' + data.user);
         console.log('Date is ' + data.date);
+        socket.emit('add-me', 'I\'m mobile!');
       });
   };
 
