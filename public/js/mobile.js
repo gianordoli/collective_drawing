@@ -34,11 +34,11 @@ app.main = (function() {
 
       //listen for event and handle DeviceOrientationEvent object
       window.addEventListener('deviceorientation', function(event) {
-        // if(isCalibrated){
-        //   orientation = getOrientation(event);
-        //   displayOrientation(event);
-        //   emitOrientation();
-        // }
+        orientation = getOrientation(event);
+        displayOrientation(event);        
+        if(isCalibrated){
+          emitOrientation();
+        }
       });
     }
   }
