@@ -28,10 +28,10 @@ app.main = (function() {
       $('#calibrate-bt').remove();
     });
 
-    var el = document.getElementsByTagName("body")[0];
-    el.addEventListener("touchstart", handleStart, false);
-    el.addEventListener("touchend", handleEnd, false);
-    el.addEventListener("touchcancel", handleEnd, false);
+    var el = document.getElementById('cube')[0];
+    el.addEventListener('touchstart', handleStart, false);
+    el.addEventListener('touchend', handleEnd, false);
+    el.addEventListener('touchcancel', handleEnd, false);
 
     // check if DeviceOrientationEvent is supported
     if (!window.DeviceOrientationEvent) {
