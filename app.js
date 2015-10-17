@@ -61,13 +61,6 @@ io.on('connection', function(socket) {
       io.sockets.emit('global message', socket.id + ' just disconnected');
       removeUser(socket.id);
   });
-
-  // 
-  if(Object.keys(users).length === 1){
-    loop = setInterval(function(){
-      renderOnClient(io);
-    }, 500);
-  }
 });
 
 function renderOnClient(io){
@@ -100,6 +93,11 @@ function addUser(id) {
         }
     }
     console.log('current users: ' + Object.keys(users).length);
+    if(Object.keys(users).length === 1){
+      loop = setInterval(function(){
+        renderOnClient(io);
+      }, 500);
+    }    
 }
 
 function removeUser(id) {
