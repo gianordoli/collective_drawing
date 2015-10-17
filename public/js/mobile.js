@@ -5,6 +5,7 @@ app.main = (function() {
   var socket;
   var orientation = {};
   var isCalibrated = false;
+  var isDrawing = false;
 
   // Initializing socket and adding listener functions
   var socketSetup = function(callback){
@@ -20,11 +21,12 @@ app.main = (function() {
 
   var attachEvents = function(){
 
-    // $('#calibrate-bt').off('click').on('click', function(){
-    //   console.log('calibrate');
-    //   socket.emit('calibrate', orientation);
-    //   isCalibrated = true;
-    // });
+    $('#calibrate-bt').off('click').on('click', function(){
+      console.log('calibrate');
+      socket.emit('calibrate', orientation);
+      isCalibrated = true;
+      $('#calibrate-bt').remove();
+    });
 
     var el = document.getElementsByTagName("body")[0];
     el.addEventListener("touchstart", handleStart, false);
@@ -41,7 +43,7 @@ app.main = (function() {
       window.addEventListener('deviceorientation', function(event) {
         orientation = getOrientation(event);
         displayOrientation(event);        
-        if(isCalibrated){
+        if(isCalibrated && isDrawing){
           emitOrientation();
         }
       });
@@ -53,13 +55,13 @@ app.main = (function() {
     console.log("touchstart.");
     console.log('calibrate');
     socket.emit('calibrate', orientation);
-    isCalibrated = true;
+    isDrawing = true;
   };
 
   function handleEnd(evt) {
     evt.preventDefault();
     console.log("touchend.");
-    isCalibrated = false;
+    isDrawing = false;
   };
 
   var getOrientation = function(){
