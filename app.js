@@ -105,7 +105,7 @@ function updateUser(id, data){
 
     // Trim
     // if(data.x >= 360){ data.x -= 360; }
-    data.x = (data.x + 90 - offsetX >= 360) ? (data.x + 90 - offsetX - 360) : ();
+    data.x = (data.x + 90 - offsetX >= 360) ? (data.x + 90 - offsetX - 360) : (data.x + 90 - offsetX);
     console.log('trimmed:\t' + data.x);
 
     // Constrain
