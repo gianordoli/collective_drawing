@@ -93,7 +93,7 @@ function updateUser(id, data){
   users[id]['pos']['y'] += speed.y;
 }
 
-function addUser(user) {
+function addUser(id) {
     if(!users.hasOwnProperty(id)) {
         users[id] = {
             color: 'hsla(' + Math.round(Math.random()*360) + ', 100%, 50%, 0.75)',
