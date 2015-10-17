@@ -98,6 +98,8 @@ function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
     console.log('original:\t' + data.x);
+    
+    var offsetX = users[id]['offset']['x'];
 
     // Offset
     // data.x = data.x + 90 - users[id]['offset']['x'];
