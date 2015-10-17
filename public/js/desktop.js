@@ -11,9 +11,10 @@ app.main = (function() {
     // Connect
       socket = io.connect();
 
-      socket.on('coordinates-from-user', function(data) {
+      socket.on('render', function(data) {
         // console.log(data);
-        updatePosition(data);
+        // updatePosition(data);
+        draw(data);
       });
 
     // Listeners
@@ -53,7 +54,8 @@ app.main = (function() {
 
   var canvas, context;
   var width, height;
-  var posX, posY, speedX, speedY, radius;
+  var balls = {};
+  // var posX, posY, speedX, speedY, radius;
 
   var canvasSetup = function(){
     canvas = document.getElementById('maze');
@@ -63,58 +65,59 @@ app.main = (function() {
       height = window.innerHeight;
       canvas.style.width = width + 'px';
       canvas.style.height = height + 'px';
-      posX = 20;
-      posY = 79;
-      speedX = 0;
-      speedY = 0;
-      radius = 12;
+      // posX = 50;
+      // posY = 50;
+      // speedX = 0;
+      // speedY = 0;
+      // radius = 5;
     }else{
       document.write ("Your browser doesn't support canvas :S");
     }
   };
 
-  function updatePosition(data) {
+  // var addBall = function(data){
+  //   console.log('Appending a new ball: ' + data.id);
+  //   var ball = $('<div class="ball" id="' + data.id + '"></div>')
+  //         .css({
+  //           'background-color': data.color,
+  //           'top': data.top,
+  //           'left': data.left
+  //         });
+  //   $('body').append(ball);
+  // };
 
-    data.x = map(data.x, 360, 180, -90, 90);
+  // var removeBall = function(data){
+  //   console.log('Called removeBall for ' + data);
+  //   $('#' + data.id).remove();
+  // };
 
-    speedX = data.x * 0.1;
-    speedY = data.y * 0.1;
-    posX += speedX;
-    posY += speedY;
+  // var moveBall = function(data){
+  //   $('#' + data.id).css({
+  //     'top': data.top,
+  //     'left': data.left
+  //   });
+  // };  
 
-    if (posX < 0){
-      posX = 0;
-    }else if(posX > width){
-      posX = width;
-    }
+  // function updatePosition(data) {
 
-    if(posY < 0){
-      posxY = 0;
-    }else if(posY > height) {  
-      posY = height;
-    }
 
-    draw();
-  };
 
-  function draw() {
+  //   draw();
+  // };
 
-    // Backgronud
-    context.fillStyle = 'rgba(255, 255, 255, .05)';
-    context.fillRect(0, 0, canvas.width, canvas.height);
+  function draw(data) {
+
+    // Background
+    // context.fillStyle = 'rgba(255, 255, 255, .05)';
+    // context.fillRect(0, 0, canvas.width, canvas.height);
 
     // Circle
     context.beginPath();
-    context.arc(posX, posY, radius, 0, 2*Math.PI);
-    context.fillStyle = 'rgba(29, 104, 255, 1)';
+    // context.arc(posX, posY, radius, 0, 2*Math.PI);
+    // context.fillStyle = 'rgba(29, 104, 255, 1)';
+    context.arc(data['pos']['x'], data['pos']['y'], 5, 0, 2*Math.PI);
+    context.fillStyle = data['color'];
     context.fill();
-  };
-
-  var map = function(value, aMin, aMax, bMin, bMax){
-      var srcMax = aMax - aMin,
-        dstMax = bMax - bMin,
-        adjValue = value - aMin;
-      return (adjValue * dstMax / srcMax) + bMin;
   };
 
   var init = function(){

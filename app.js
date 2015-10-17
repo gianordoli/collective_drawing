@@ -48,8 +48,7 @@ io.on('connection', function(socket) {
     */
   // When Browser connects to socket: (whenever connection event fires)
   // EMIT 'start' event to connected socket
-  socket.emit('start', { //start event is something we define
-    //pass in an object:
+  socket.emit('start', {
     user: socket.id, //user property
     date: new Date() //date property (todays date)
   });
@@ -62,12 +61,15 @@ io.on('connection', function(socket) {
     // Coordinates from one user
     //console.log(socket.id + ' has sent: ' + data);
     console.log('has sent: ', socket.id, data);
+    updateUser(socket.id, data);
     // Emit coordinates to every clients (all players)
-    io.sockets.emit('coordinates-from-user', {
-      //attaching
-      x: data.x,
-      y: data.y,
-      z: data.z
+    io.sockets.emit('render', { // Update position on client
+        id: socket.id,
+        color: users[socket.id]['color'],
+        pos: {
+          x: users[socket.id][['pos']['x'],
+          y: users[socket.id]['pos']['y']          
+        }
     });
   });
   
@@ -79,14 +81,41 @@ io.on('connection', function(socket) {
     
 });
 
-function addUser(user) {
-  if (users.indexOf(user) === -1) {
-    users.push(user);
+function updateUser(id, data){
+
+  data.x = map(data.x, 360, 180, -90, 90);
+
+  var speed = {
+    x: data.x * 0.1,
+    y: data.y * 0.1
   }
-  console.log('current users: ' + users.length);
+  users[id]['pos']['x'] += speed.x;
+  users[id]['pos']['y'] += speed.y;
 }
 
-function removeUser(user) {
-  users.splice(user, 1);
-  console.log('current users: ' + users.length);
+function addUser(user) {
+    if(!users.hasOwnProperty(id)) {
+        users[id] = {
+            color: 'hsla(' + Math.round(Math.random()*360) + ', 100%, 50%, 0.75)',
+            pos: {
+              x: 50,
+              y: 50
+            }
+        }
+    }
+    console.log('current users: ' + Object.keys(users).length);
 }
+
+function removeUser(id) {
+    if(users.hasOwnProperty(id)) {
+        delete users[id]
+    }
+    console.log('current users: ' + Object.keys(users).length);
+}
+
+var map = function(value, aMin, aMax, bMin, bMax){
+    var srcMax = aMax - aMin,
+      dstMax = bMax - bMin,
+      adjValue = value - aMin;
+    return (adjValue * dstMax / srcMax) + bMin;
+};
