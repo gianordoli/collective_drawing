@@ -45,13 +45,11 @@ io.on('connection', function(socket) {
   socket.on('add-me', function(data) {
     console.log(data);
     addUser(socket.id);
-  }
+  });
 
   // Listening for coordinates
-  socket.on('coordinates', function(data) { //when we get data from the socket
-    // Coordinates from one user
-    //console.log(socket.id + ' has sent: ' + data);
-    console.log('has sent: ', socket.id, data);
+  socket.on('coordinates', function(data) {
+    console.log('has sent: ' + socket.id, data);
     updateUser(socket.id, data);
   });
   
