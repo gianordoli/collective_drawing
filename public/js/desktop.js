@@ -5,6 +5,7 @@ app.main = (function() {
   var socket;
   var canvas, context;
   var width, height;
+  var users = {};
 
   // Initializing socket and adding listener functions
   var socketSetup = function(callback){
@@ -45,8 +46,8 @@ app.main = (function() {
       // Circle
       context.beginPath();
       context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);
-      context.fillStyle = data[user]['color'];
-      context.fill();
+      context.strokeStyle = data[user]['color'];
+      context.stroke();
     }
   };
 
