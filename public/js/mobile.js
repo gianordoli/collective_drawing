@@ -3,8 +3,8 @@ var app = app || {};
 app.main = (function() {
 
   var socket;
-  var orientation;
-  var isCalibrated;
+  var orientation = {};
+  var isCalibrated = false;
 
   // Initializing socket and adding listener functions
   var socketSetup = function(callback){
@@ -21,7 +21,8 @@ app.main = (function() {
   var attachEvents = function(){
 
     $('calibrate-bt').off('click').on('click', function(){
-      // socket.emit('calibrate')
+      socket.emit('calibrate', orientation);
+      isCalibrated = true;
     });
 
     // check if DeviceOrientationEvent is supported
@@ -32,9 +33,11 @@ app.main = (function() {
 
       //listen for event and handle DeviceOrientationEvent object
       window.addEventListener('deviceorientation', function(event) {
-        orientation = getOrientation(event);
-        displayOrientation(event);
-        emitOrientation();
+        if(isCalibrated){
+          orientation = getOrientation(event);
+          displayOrientation(event);
+          emitOrientation();
+        }
       });
     }
   }

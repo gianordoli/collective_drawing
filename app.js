@@ -50,6 +50,11 @@ io.on('connection', function(socket) {
     addUser(socket.id);
   });
 
+  socket.on('calibrate', function(data) {
+    console.log(data);
+    calibrateUser(socket.id, data);
+  });  
+
   // Listening for coordinates
   socket.on('orientation', function(data) {
     console.log('has sent: ' + socket.id, data);
@@ -67,6 +72,15 @@ function renderOnClient(io){
   console.log('Called renderOnClient');
   // Emit coordinates to every clients (all players)
   io.sockets.emit('render', users);
+}
+
+function calibrateUser(id, data){
+  if(users.hasOwnProperty(id)){
+    users[id]['offset'] = {
+      x: data.x;
+      y: data.y
+    }
+  }
 }
 
 function updateUser(id, data){
