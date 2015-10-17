@@ -42,17 +42,19 @@ app.main = (function() {
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){
-      console.log(data[user]['pos']['x']);
-      console.log(data[user]['color']);
+      // console.log(data[user]['pos']['x']);
+      // console.log(data[user]['color']);
+      var color = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
+      
       // Circle
       context.beginPath();
       if(data[user]['isDrawing']){
         context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);        
-        context.fillStyle = data[user]['color'];
+        context.fillStyle = color;
         context.fill();
       }else{
         context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 1, 0, 2*Math.PI);
-        context.strokeStyle = data[user]['color'];
+        context.strokeStyle = color;
         context.stroke();
       }
     }

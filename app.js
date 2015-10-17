@@ -90,7 +90,7 @@ function calibrateUser(id, data){
     if(Object.keys(users).length === 1){
       loop = setInterval(function(){
         renderOnClient(io);
-      }, 100);
+      }, 50);
     }    
   }  
 }
@@ -109,7 +109,7 @@ function updateUserPosition(id, data){
     }
     console.log('out:\t' + data.orientation.x);
 
-    data.orientation.x = map(data.orientation.x, 180, -180, -90, 90);
+    data.orientation.x = Math,round(map(data.orientation.x, 180, -180, -90, 90));
     console.log('map:\t' + data.orientation.x);
 
     data.orientation.y -= users[id]['offset']['y'];
@@ -133,7 +133,7 @@ function addUser(id) {
   console.log('FUNCTION: addUser');
   if(!users.hasOwnProperty(id)) {
       users[id] = {
-          color: 'hsla(' + Math.round(Math.random()*360) + ', 100%, 50%, 0.75)',
+          color: Math.round(Math.random()*360),
           pos: {
             x: 50,
             y: 50
