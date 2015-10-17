@@ -50,7 +50,7 @@ app.main = (function() {
 
   function handleStart(evt) {
     evt.preventDefault();
-    log("touchstart.");
+    console.log("touchstart.");
     console.log('calibrate');
     socket.emit('calibrate', orientation);
     isCalibrated = true;
@@ -58,7 +58,7 @@ app.main = (function() {
 
   function handleEnd(evt) {
     evt.preventDefault();
-    log("touchend.");
+    console.log("touchend.");
     isCalibrated = false;
   };
 
