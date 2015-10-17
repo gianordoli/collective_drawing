@@ -20,11 +20,18 @@ app.main = (function() {
 
   var attachEvents = function(){
 
-    $('#calibrate-bt').off('click').on('click', function(){
-      console.log('calibrate');
-      socket.emit('calibrate', orientation);
-      isCalibrated = true;
-    });
+    // $('#calibrate-bt').off('click').on('click', function(){
+    //   console.log('calibrate');
+    //   socket.emit('calibrate', orientation);
+    //   isCalibrated = true;
+    // });
+
+    var el = document.getElementsByTagName("body")[0];
+    el.addEventListener("touchstart", handleStart, false);
+    el.addEventListener("touchend", handleEnd, false);
+    el.addEventListener("touchcancel", handleEnd, false);
+    // el.addEventListener("touchmove", handleMove, false);
+    log("initialized.");    
 
     // check if DeviceOrientationEvent is supported
     if (!window.DeviceOrientationEvent) {
@@ -42,6 +49,20 @@ app.main = (function() {
       });
     }
   }
+
+  function handleStart(evt) {
+    evt.preventDefault();
+    log("touchstart.");
+    console.log('calibrate');
+    socket.emit('calibrate', orientation);
+    isCalibrated = true;
+  };
+
+  function handleEnd(evt) {
+    evt.preventDefault();
+    log("touchend.");
+    isCalibrated = false;
+  };
 
   var getOrientation = function(){
     var tiltFrontToBack = Math.round(event.beta);

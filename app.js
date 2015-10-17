@@ -109,23 +109,6 @@ function updateUser(id, data){
     }
     console.log('out:\t' + data.x);
 
-    // var constrainedX;
-    // if(offsetX + 90 < data.x && data.x <= offsetX + 180){
-    //   constrainedX = offsetX + 90;
-    // }else if(offsetX + 180 < data.x && data.x < offsetX + 270){
-    //   constrainedX = offsetX + 270;
-    // }else{
-    //   constrainedX = data.x;
-    // }
-    // console.log('constrained:\t' + constrainedX);
-
-    // var targetX;
-    // if(offsetX <= constrainedX && constrainedX <= offsetX + 90){
-    //   targetX = offsetX - constrainedX;
-    // }else if(offsetX + 270 <= constrainedX && constrainedX <= offsetX + 360){
-    //   targetX = 360 - constrainedX + offsetX;
-    // }
-    // console.log('target:\t' + targetX);
     data.x = map(data.x, 180, -180, -90, 90);
     console.log('map:\t' + data.x);
     var speed = {
