@@ -41,7 +41,7 @@ app.main = (function() {
 
     for(var user in data){
       console.log(data[user]['pos']['x']);
-      console.log(data[user][color]);
+      console.log(data[user]['color']);
       // Circle
       context.beginPath();
       context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);
