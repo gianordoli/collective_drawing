@@ -46,8 +46,13 @@ app.main = (function() {
       // Circle
       context.beginPath();
       context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);
-      context.strokeStyle = data[user]['color'];
-      context.stroke();
+      if(data[user]['isDrawing']){
+        context.fillStyle = data[user]['color'];
+        context.fill();
+      }else{
+        context.strokeStyle = data[user]['color'];
+        context.stroke();
+      }
     }
   };
 

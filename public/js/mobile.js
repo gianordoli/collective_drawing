@@ -43,7 +43,7 @@ app.main = (function() {
       window.addEventListener('deviceorientation', function(event) {
         orientation = getOrientation(event);
         displayOrientation(event);        
-        if(isCalibrated && isDrawing){
+        if(isCalibrated){
           emitOrientation();
         }
       });
@@ -69,7 +69,10 @@ app.main = (function() {
   }
 
   var emitOrientation = function(){
-    socket.emit('orientation', orientation);
+    socket.emit('orientation', {
+      orientation: orientation,
+      isDrawing: isDrawing
+    });
   }
 
   var displayOrientation = function(){

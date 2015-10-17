@@ -62,7 +62,8 @@ io.on('connection', function(socket) {
   socket.on('orientation', function(data) {
     console.log('SOCKET: orientation');
     // console.log('has sent: ' + socket.id, data);
-    updateUser(socket.id, data);
+    updateUserPosition(socket.id, data);
+    users[socket.io]['isDrawing'] = data.isDrawing;
   });
   
   socket.on('disconnect', function() {
@@ -94,26 +95,26 @@ function calibrateUser(id, data){
   }  
 }
 
-function updateUser(id, data){
+function updateUserPosition(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
-    console.log('in:\t' + data.x);
+    console.log('in:\t' + data.orientation.x);
 
     var offsetX = users[id]['offset']['x'];
-    data.x -= offsetX;
+    data.orientation.x -= offsetX;
     console.log('offset:\t' + offsetX);    
-    console.log('relative:\t' + data.x);
+    console.log('relative:\t' + data.orientation.x);
     
-    if(data.x > 180){
-      data.x = data.x - 360;
+    if(data.orientation.x > 180){
+      data.orientation.x = data.orientation.x - 360;
     }
-    console.log('out:\t' + data.x);
+    console.log('out:\t' + data.orientation.x);
 
-    data.x = map(data.x, 180, -180, -90, 90);
-    console.log('map:\t' + data.x);
+    data.orientation.x = map(data.orientation.x, 180, -180, -90, 90);
+    console.log('map:\t' + data.orientation.x);
     var speed = {
-      x: data.x * 0.1,
-      y: data.y * 0.1
+      x: data.orientation.x * 0.1,
+      y: data.orientation.y * 0.1
     }
     users[id]['pos']['x'] += speed.x;
     if(users[id]['pos']['x'] < 0){
@@ -138,7 +139,8 @@ function addUser(id) {
           offset: {
             x: 0,
             y: 0
-          }
+          },
+          isDrawing: false
       }
   }
   console.log('current users: ' + Object.keys(users).length);
