@@ -98,19 +98,21 @@ function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
     
-    // Constrain
-    if(90 < data.x && data.x < 180){
-      data.x = 90;
-    }else if(180 < data.x && data.x < 270){
-      data.x = 270;
-    }
+    data.x = (data.x +90 > 360) ? (data.x + 90 - 360) : (data.x + 90);
+
+    // // Constrain
+    // if(90 < data.x && data.x < 180){
+    //   data.x = 90;
+    // }else if(180 < data.x && data.x < 270){
+    //   data.x = 270;
+    // }
     
-    // Offset
-    data.x += 90;
-    
-    // Trim
-    data.x = (data.x > 360) ? (data.x - 360) : (data.x);
-    // data.x = data.x + (90 - users[id]['offset']['x']);
+    // // Offset
+    // data.x += 90;
+
+    // // Trim
+    // data.x = (data.x > 360) ? (data.x - 360) : (data.x);
+    // // data.x = data.x + (90 - users[id]['offset']['x']);
 
     // Map
     data.x = map(data.x, 180, 0, -90, 90);
