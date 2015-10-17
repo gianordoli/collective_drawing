@@ -10,8 +10,8 @@ app.main = (function() {
 
       // Assigning function to the 'start' event on that socket
       socket.on('welcome', function(data) { //when we get data from socket
-        console.log('User is ' + data.user);
-        console.log('Date is ' + data.date);
+        console.log(data.msg);
+        console.log(data.users);
         socket.emit('add-me', 'I\'m mobile!');
       });
   };

@@ -41,6 +41,7 @@ app.main = (function() {
     // context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){
+      console.log(user);
       // Circle
       context.beginPath();
       context.arc(user['pos']['x'], user['pos']['y'], 5, 0, 2*Math.PI);
