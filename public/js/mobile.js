@@ -46,7 +46,7 @@ app.main = (function() {
   }
 
   var emitOrientation = function(){
-    socket.emit('orientation', orientation);    
+    socket.emit('orientation', orientation);
   }
 
   var displayOrientation = function(){
