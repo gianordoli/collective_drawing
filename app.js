@@ -34,7 +34,7 @@ server.listen(port, function() {
   console.log('Server running at port:' + port);
 });
 
-var users = [];
+var users = {};
 
 //Assign function to 'connection' event for the connected socket
 io.on('connection', function(socket) {
