@@ -109,10 +109,10 @@ function updateUserPosition(id, data){
     }
     console.log('out:\t' + data.orientation.x);
 
-    if(90 < data.x && data.x < 180){
-      data.x = 90;
-    }else if(-90 > data.x && data.x > -180){
-      data.x = -90;
+    if(90 < data.orientation.x && data.orientation.x < 180){
+      data.orientation.x = 90;
+    }else if(-90 > data.orientation.x && data.orientation.x > -180){
+      data.orientation.x = -90;
     }
     console.log('trim:\t' + data.orientation.x);
 
