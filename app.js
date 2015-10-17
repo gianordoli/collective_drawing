@@ -98,14 +98,17 @@ function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
     console.log('in:' + data.x);
-    data.x = (data.x +90 > 360) ? (data.x + 90 - 360) : (data.x + 90);
+
+    // Constrain
+    if(90 < data.x && data.x < 180){
+      data.x = 90;
+    }else if(180 < data.x && data.x < 270){
+      data.x = 270;
+    }
+    console.log('constrained:' + data.x);
+
+    data.x = (data.x + 90 > 360) ? (data.x + 90 - 360) : (data.x + 90);
     console.log('out:' + data.x);
-    // // Constrain
-    // if(90 < data.x && data.x < 180){
-    //   data.x = 90;
-    // }else if(180 < data.x && data.x < 270){
-    //   data.x = 270;
-    // }
     
     // // Offset
     // data.x += 90;
