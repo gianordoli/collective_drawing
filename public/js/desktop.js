@@ -12,7 +12,7 @@ app.main = (function() {
       socket = io.connect();
 
       socket.on('render', function(data) {
-        // console.log(data);
+        console.log(data);
         // updatePosition(data);
         draw(data);
       });
