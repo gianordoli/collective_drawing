@@ -38,23 +38,22 @@ app.main = (function() {
   function draw(data) {
 
     // Background
-    context.fillStyle = 'rgba(0, 0, 0, 0.01)';
+    context.fillStyle = 'rgba(0, 0, 0, 0.001)';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){
       // console.log(data[user]['pos']['x']);
       // console.log(data[user]['color']);
-      var color = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
 
       // Circle
       context.beginPath();
       if(data[user]['isDrawing']){
         context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);        
-        context.fillStyle = color;
+        context.fillStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
         context.fill();
       }else{
         context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 1, 0, 2*Math.PI);
-        context.strokeStyle = color;
+        context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.25)';
         context.stroke();
       }
     }
