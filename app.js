@@ -100,12 +100,12 @@ function updateUser(id, data){
     console.log('original:\t' + data.x);
 
     // Offset
-    data.x = data.x + 90 - users[id]['offset']['x']
-    console.log('offset\t:' + data.x);
+    // data.x = data.x + 90 - users[id]['offset']['x'];
+    // console.log('offset\t:' + data.x);
 
     // Trim
-    if(data.x >= 360){ data.x -= 360; }
-    // data.x = (data.x + 90 - offsetX >= 360) ? (data.x + 90 - offsetX - 360) : ();
+    // if(data.x >= 360){ data.x -= 360; }
+    data.x = (data.x + 90 - offsetX >= 360) ? (data.x + 90 - offsetX - 360) : ();
     console.log('trimmed:\t' + data.x);
 
     // Constrain
