@@ -69,7 +69,7 @@ io.on('connection', function(socket) {
 });
 
 function renderOnClient(io){
-  console.log('Called renderOnClient');
+  // console.log('Called renderOnClient');
   // Emit coordinates to every clients (all players)
   io.sockets.emit('render', users);
 }

@@ -21,6 +21,7 @@ app.main = (function() {
   var attachEvents = function(){
 
     $('calibrate-bt').off('click').on('click', function(){
+      console.log('calibrate');
       socket.emit('calibrate', orientation);
       isCalibrated = true;
     });
