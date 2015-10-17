@@ -23,7 +23,7 @@ app.main = (function() {
     $('#calibrate-bt').off('click').on('click', function(){
       console.log('calibrate');
       socket.emit('calibrate', orientation);
-      // isCalibrated = true;
+      isCalibrated = true;
     });
 
     // check if DeviceOrientationEvent is supported
@@ -44,8 +44,8 @@ app.main = (function() {
   }
 
   var getOrientation = function(){
-    var tiltFrontToBack = event.beta;
-    var direction = event.alpha;
+    var tiltFrontToBack = Math.round(event.beta);
+    var direction = Math.round(event.alpha);
     return {x: direction, y: -tiltFrontToBack};
   }
 
