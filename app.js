@@ -90,7 +90,7 @@ function calibrateUser(id, data){
     if(Object.keys(users).length === 1){
       loop = setInterval(function(){
         renderOnClient(io);
-      }, 50);
+      }, 20);
     }    
   }  
 }

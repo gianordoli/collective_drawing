@@ -38,14 +38,14 @@ app.main = (function() {
   function draw(data) {
 
     // Background
-    context.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    context.fillStyle = 'rgba(0, 0, 0, 0.01)';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){
       // console.log(data[user]['pos']['x']);
       // console.log(data[user]['color']);
       var color = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
-      
+
       // Circle
       context.beginPath();
       if(data[user]['isDrawing']){
