@@ -28,7 +28,7 @@ app.main = (function() {
       $('#calibrate-bt').remove();
     });
 
-    var el = document.getElementById('cube')[0];
+    var el = document.getElementById('cube');
     el.addEventListener('touchstart', handleStart, false);
     el.addEventListener('touchend', handleEnd, false);
     el.addEventListener('touchcancel', handleEnd, false);
