@@ -6,7 +6,12 @@ var PORT = 3300;
 var server = require('http').Server(app);   // Socket.io setup
 var io = require('socket.io')(server);
 
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: false }));// parse application/x-www-form-urlencoded
+app.use(bodyParser.json());                         // parse application/json
+
 // Detecting if the connecting user is using mobile or desktop
+app.use('/', express.static(__dirname + '/public'));
 app.use('*', function(req, res) {
   // console.log(req.headers['user-agent']);
   // Say if req.headers['user-agent'] contains "Mobile", re-route the user to mobile interface
@@ -20,8 +25,6 @@ app.use('*', function(req, res) {
     res.redirect('desktop.html');
   }
 });
-
-app.use('/', express.static(__dirname + '/public'));
 
 server.listen(PORT, function(){
     console.log('Express server is running at ' + PORT);
