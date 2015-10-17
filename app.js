@@ -97,43 +97,30 @@ function calibrateUser(id, data){
 function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
-    console.log('original:\t' + data.x);
     
     var offsetX = users[id]['offset']['x'];
 
-    // Offset
-    // data.x = data.x + 90 - users[id]['offset']['x'];
-    // console.log('offset\t:' + data.x);
+    console.log('original:\t' + data.x);
 
-    // Trim
-    // if(data.x >= 360){ data.x -= 360; }
-    data.x = (data.x + 90 - offsetX >= 360) ? (data.x + 90 - offsetX - 360) : (data.x + 90 - offsetX);
-    console.log('trimmed:\t' + data.x);
-
-    // Constrain
-    if(180 < data.x && data.x <= 270){
-      data.x = 180;
-    }else if(270 < data.x && data.x < 360){
-      data.x = 0;
+    var constrainedX;
+    if(offsetX + 90 < data.x && data.x <= offsetX + 180){
+      constrainedX = offsetX + 90;
+    }else if(offsetX + 180 < data.x && data.x < offsetX + 270){
+      constrainedX = offsetX + 270;
+    }else{
+      constrainedX = data.x;
     }
-    console.log('constrained:\t' + data.x);
+    console.log('constrained:' + constrainedX);
 
-    
-    
-    // // Offset
-    // data.x += 90;
-
-    // // Trim
-    // data.x = (data.x > 360) ? (data.x - 360) : (data.x);
-    // // data.x = data.x + (90 - users[id]['offset']['x']);
-
-    // Map
-    data.x = map(data.x, 180, 0, -90, 90);
-    if(data.x < -90){ data.x = -90 };
-    if(data.x >  90){ data.x =  90 };
+    var targetX;
+    if(offsetX <= constrainedX && constrainedX <= offsetX + 90){
+      targetX = offsetX - constrainedX;
+    }else if(offsetX + 270 <= constrainedX && constrainedX <= offsetX + 360){
+      targetX = 360 - constrainedX + offsetX;
+    }
 
     var speed = {
-      x: data.x * 0.1,
+      x: targetX * 0.1,
       y: data.y * 0.1
     }
     users[id]['pos']['x'] += speed.x;
