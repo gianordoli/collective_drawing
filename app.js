@@ -97,9 +97,9 @@ function calibrateUser(id, data){
 function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
-    
+    console.log('in:' + data.x);
     data.x = (data.x +90 > 360) ? (data.x + 90 - 360) : (data.x + 90);
-
+    console.log('out:' + data.x);
     // // Constrain
     // if(90 < data.x && data.x < 180){
     //   data.x = 90;
