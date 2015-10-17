@@ -23,7 +23,7 @@ app.main = (function() {
     $('#calibrate-bt').off('click').on('click', function(){
       console.log('calibrate');
       socket.emit('calibrate', orientation);
-      isCalibrated = true;
+      // isCalibrated = true;
     });
 
     // check if DeviceOrientationEvent is supported
