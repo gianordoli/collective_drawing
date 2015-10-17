@@ -109,7 +109,7 @@ function updateUserPosition(id, data){
     }
     console.log('out:\t' + data.orientation.x);
 
-    data.orientation.x = Math,round(map(data.orientation.x, 180, -180, -90, 90));
+    data.orientation.x = Math.round(map(data.orientation.x, 180, -180, -90, 90));
     console.log('map:\t' + data.orientation.x);
 
     data.orientation.y -= users[id]['offset']['y'];
