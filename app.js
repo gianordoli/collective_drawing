@@ -77,15 +77,16 @@ function renderOnClient(io){
 }
 
 function updateUser(id, data){
+  if(users.hasOwnProperty(id)) {
+    data.x = map(data.x, 360, 180, -90, 90);
 
-  data.x = map(data.x, 360, 180, -90, 90);
-
-  var speed = {
-    x: data.x * 0.1,
-    y: data.y * 0.1
+    var speed = {
+      x: data.x * 0.1,
+      y: data.y * 0.1
+    }
+    users[id]['pos']['x'] += speed.x;
+    users[id]['pos']['y'] += speed.y;
   }
-  users[id]['pos']['x'] += speed.x;
-  users[id]['pos']['y'] += speed.y;
 }
 
 function addUser(id) {
