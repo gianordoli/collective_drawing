@@ -67,8 +67,8 @@ io.on('connection', function(socket) {
         id: socket.id,
         color: users[socket.id]['color'],
         pos: {
-          x: users[socket.id][['pos']['x'],
-          y: users[socket.id]['pos']['y']          
+          x: users[socket.id]['pos']['x'],
+          y: users[socket.id]['pos']['y']
         }
     });
   });
