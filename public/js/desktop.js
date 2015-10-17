@@ -16,10 +16,6 @@ app.main = (function() {
       console.log(data.msg);
     });
 
-    // socket.on('add-user', function(data){
-    //   addUser(data);
-    // });
-
     socket.on('render', function(data) {
       // console.log(data);
       draw(data);
@@ -39,24 +35,10 @@ app.main = (function() {
     }
   };
 
-  // function addUser(newUser) {
-  //   console.log('FUNCTION: addUser');
-  //   if(!users.hasOwnProperty(newUser['id'])) {
-  //     users[id] = newUser;
-  //   }
-  // }
-
-  // function update(data){
-  //   for(var user in data){
-  //     if(data[user]['isDrawing']){
-  //     }
-  //   }
-  // }
-
   function draw(data) {
 
     // Background
-    context.fillStyle = '#000';
+    context.fillStyle = 'rgba(0, 0, 0, 0.5)';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){
@@ -64,11 +46,12 @@ app.main = (function() {
       console.log(data[user]['color']);
       // Circle
       context.beginPath();
-      context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);
       if(data[user]['isDrawing']){
+        context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);        
         context.fillStyle = data[user]['color'];
         context.fill();
       }else{
+        context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 1, 0, 2*Math.PI);
         context.strokeStyle = data[user]['color'];
         context.stroke();
       }

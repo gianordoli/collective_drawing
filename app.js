@@ -50,7 +50,6 @@ io.on('connection', function(socket) {
     console.log('SOCKET: add-me');
     console.log(data);
     addUser(socket.id);
-    // io.sockets.emit('add-user', users[socket.id]);
   });
 
   socket.on('calibrate', function(data) {
