@@ -39,26 +39,27 @@ io.on('connection', function(socket) {
       msg: 'Welcome! your id is ' + socket.id,
       users: users
   });
-  
-  var ua = req.headers['user-agent'];
-  if (ua.indexOf('Mobile') > -1) {  
-    addUser(socket.id);
 
-    //Our event handlers
-    // Listening for coordinates
-    socket.on('coordinates', function(data) { //when we get data from the socket
-      // Coordinates from one user
-      //console.log(socket.id + ' has sent: ' + data);
-      console.log('has sent: ', socket.id, data);
-      updateUser(socket.id, data);
-    });
-    
-    socket.on('disconnect', function() {
-        console.log(socket.id + ' just disconnected');
-        io.sockets.emit('global message', socket.id + ' just disconnected');
-        removeUser(socket.id);
-    });
+  //Our event handlers
+  // Is this coming from a mobile device?
+  socket.on('add-me', function(data) {
+    console.log(data);
+    addUser(socket.id);
   }
+
+  // Listening for coordinates
+  socket.on('coordinates', function(data) { //when we get data from the socket
+    // Coordinates from one user
+    //console.log(socket.id + ' has sent: ' + data);
+    console.log('has sent: ', socket.id, data);
+    updateUser(socket.id, data);
+  });
+  
+  socket.on('disconnect', function() {
+      console.log(socket.id + ' just disconnected');
+      io.sockets.emit('global message', socket.id + ' just disconnected');
+      removeUser(socket.id);
+  });
 
   // 
   if(Object.keys(users).length === 1){
