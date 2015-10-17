@@ -97,12 +97,16 @@ function calibrateUser(id, data){
 function updateUser(id, data){
   console.log('FUNCTION: updateUser');
   if(users.hasOwnProperty(id)) {
-    console.log('in:' + data.x);
+    console.log('original:\t' + data.x);
 
-    var offsetX = users[id]['offset']['x'];
+    // Offset
+    data.x = data.x + 90 - users[id]['offset']['x']
+    console.log('offset\t:' + data.x);
 
-    data.x = (data.x + 90 - offsetX >= 360) ? (data.x + 90 - offsetX - 360) : (data.x + 90 - offsetX);
-    console.log('out:' + data.x);
+    // Trim
+    if(data.x >= 360){ data.x -= 360; }
+    // data.x = (data.x + 90 - offsetX >= 360) ? (data.x + 90 - offsetX - 360) : ();
+    console.log('trimmed:\t' + data.x);
 
     // Constrain
     if(180 < data.x && data.x <= 270){
@@ -110,7 +114,7 @@ function updateUser(id, data){
     }else if(270 < data.x && data.x < 360){
       data.x = 0;
     }
-    console.log('constrained:' + data.x);
+    console.log('constrained:\t' + data.x);
 
     
     
