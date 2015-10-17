@@ -120,6 +120,10 @@ function addUser(id) {
           pos: {
             x: 50,
             y: 50
+          },
+          offset: {
+            x: 0,
+            y: 0
           }
       }
   }
