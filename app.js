@@ -82,6 +82,9 @@ function renderOnClient(io){
 
 function calibrateUser(id, data){
   console.log('FUNCTION: calibrateUser');
+  if(data.x > 180){
+    data.x -= 360;
+  }  
   if(users.hasOwnProperty(id)){
     users[id]['offset'] = {
       x: data.x,
@@ -105,7 +108,7 @@ function updateUserPosition(id, data){
     console.log('relative:\t' + data.orientation.x);
     
     if(data.orientation.x > 180){
-      data.orientation.x = data.orientation.x - 360;
+      data.orientation.x -= 360;
     }
     console.log('out:\t' + data.orientation.x);
 
