@@ -1,18 +1,12 @@
-//SERVER SIDE
-
-var express = require('express');
-
-var app = express();
-var server = require('http').Server(app);
+/*---------- BASIC SETUP ----------*/
+var express   = require('express'),
+  bodyParser  = require('body-parser');     // helper for parsing HTTP requests
+var app = express();                        // our Express app
+var PORT = 3300;
+var server = require('http').Server(app);   // Socket.io setup
 var io = require('socket.io')(server);
-var port = 3300; //start a connect the app on port 3300
 
-/*
-Apon:
-Detecting if the connecting user is using mobile or desktop
-http://www.hacksparrow.com/detect-browser-user-agent-in-express-js-node-js.html
-*/
-app.use('/', express.static(__dirname + '/public'));
+// Detecting if the connecting user is using mobile or desktop
 app.use('*', function(req, res) {
   // console.log(req.headers['user-agent']);
   // Say if req.headers['user-agent'] contains "Mobile", re-route the user to mobile interface
@@ -26,12 +20,11 @@ app.use('*', function(req, res) {
     res.redirect('desktop.html');
   }
 });
-//////////
 
+app.use('/', express.static(__dirname + '/public'));
 
-
-server.listen(port, function() {
-  console.log('Server running at port:' + port);
+server.listen(PORT, function(){
+    console.log('Express server is running at ' + PORT);
 });
 
 var users = {};
@@ -41,29 +34,31 @@ var loop;
 io.on('connection', function(socket) {
 
   /*––––––––––– SOCKET.IO starts here –––––––––––––––*/
-  // When Browser connects to socket: (whenever connection event fires)
-  // EMIT 'start' event to connected socket
-  socket.emit('start', {
-    user: socket.id, //user property
-    date: new Date() //date property (todays date)
-  });
-  console.log(socket.id + ' just connected');
-  addUser(socket.id);
-
-  //Our event handlers
-  // Listening for coordinates
-  socket.on('coordinates', function(data) { //when we get data from the socket
-    // Coordinates from one user
-    //console.log(socket.id + ' has sent: ' + data);
-    console.log('has sent: ', socket.id, data);
-    updateUser(socket.id, data);
+  console.log('A new user has connected: ' + socket.id);  
+  socket.emit('welcome', {
+      msg: 'Welcome! your id is ' + socket.id,
+      users: users
   });
   
-  socket.on('disconnect', function() {
-      console.log(socket.id + ' just disconnected');
-      io.sockets.emit('global message', socket.id + ' just disconnected');
-      removeUser(socket.id);
-  });
+  var ua = req.headers['user-agent'];
+  if (ua.indexOf('Mobile') > -1) {  
+    addUser(socket.id);
+
+    //Our event handlers
+    // Listening for coordinates
+    socket.on('coordinates', function(data) { //when we get data from the socket
+      // Coordinates from one user
+      //console.log(socket.id + ' has sent: ' + data);
+      console.log('has sent: ', socket.id, data);
+      updateUser(socket.id, data);
+    });
+    
+    socket.on('disconnect', function() {
+        console.log(socket.id + ' just disconnected');
+        io.sockets.emit('global message', socket.id + ' just disconnected');
+        removeUser(socket.id);
+    });
+  }
 
   // 
   if(Object.keys(users).length === 1){

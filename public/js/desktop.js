@@ -10,7 +10,10 @@ app.main = (function() {
   var socketSetup = function(callback){
 
     socket = io.connect();
-
+    socket.on('welcome', function(data){
+      console.log('SOCKET: welcome');
+      console.log(data.msg);
+    });
     socket.on('render', function(data) {
       // console.log(data);
       // updatePosition(data);
