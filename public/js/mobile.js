@@ -42,7 +42,7 @@ app.main = (function() {
       //listen for event and handle DeviceOrientationEvent object
       window.addEventListener('deviceorientation', function(event) {
         orientation = getOrientation(event);
-        displayOrientation(event);        
+        displayOrientation(event);
         if(isCalibrated){
           emitOrientation();
         }
