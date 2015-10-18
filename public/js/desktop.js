@@ -30,6 +30,8 @@ app.main = (function() {
       height = window.innerHeight;
       canvas.style.width = width + 'px';
       canvas.style.height = height + 'px';
+      context.lineJoin = 'round';
+      context.lineCap = 'round';      
     }else{
       document.write ("Your browser doesn't support canvas :S");
     }
@@ -38,7 +40,7 @@ app.main = (function() {
   function draw(data) {
 
     // Background
-    context.fillStyle = 'rgba(0, 0, 0, 0.01)';
+    context.fillStyle = 'rgba(0, 0, 0, 0.02)';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){      
@@ -57,22 +59,16 @@ app.main = (function() {
 
       // Circle
       context.beginPath();
-      if(data[user]['isDrawing']){
-        context.lineWidth = 10;
-        context.lineJoin = 'round';
-        context.lineCap = 'round';
         context.moveTo(prevX, prevY);
-        context.lineTo(data[user]['pos']['x'], data[user]['pos']['y']);
-        context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
-        context.stroke();     
-        // context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);
-        // context.fillStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
-        // context.fill();
-      }else{        
-        context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 1, 0, 2*Math.PI);
-        context.fillStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.1)';
-        context.fill();
-      }
+        context.lineTo(data[user]['pos']['x'], data[user]['pos']['y']);      
+        if(data[user]['isDrawing']){
+          context.lineWidth = 10;
+          context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
+        }else{        
+          context.lineWidth = 2;
+          context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.1)';
+        }
+        context.stroke();
       context.closePath();
 
       localUsers[user] = {
