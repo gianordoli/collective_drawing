@@ -137,7 +137,7 @@ function addUser(id) {
   console.log('FUNCTION: addUser');
   if(!users.hasOwnProperty(id)) {
       users[id] = {
-          color: Math.round(Math.random()*360),
+          color: Math.round(Math.random()*290),
           pos: {
             x: 50,
             y: 50
