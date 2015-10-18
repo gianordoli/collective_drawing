@@ -119,8 +119,8 @@ function updateUserPosition(id, data){
     data.orientation.y -= users[id]['offset']['y'];
 
     var speed = {
-      x: data.orientation.x * 0.1,
-      y: data.orientation.y * 0.2
+      x: data.orientation.x * 0.3,
+      y: data.orientation.y * 0.3
     }
     users[id]['pos']['x'] = Math.round(users[id]['pos']['x'] + speed.x);
     if(users[id]['pos']['x'] < 0){
