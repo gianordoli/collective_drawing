@@ -37,7 +37,7 @@ app.main = (function() {
     if (!window.DeviceOrientationEvent) {
       document.getElementById('do-unsupported').classList.remove('hidden');
     } else {
-      document.getElementById('do-info').classList.remove('hidden');
+      // document.getElementById('do-info').classList.remove('hidden');
 
       //listen for event and handle DeviceOrientationEvent object
       window.addEventListener('deviceorientation', function(event) {

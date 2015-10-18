@@ -53,7 +53,7 @@ app.main = (function() {
         // context.lineTo(data[user]['pos']['x'], data[user]['pos']['y']);
         // context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
         // context.stroke();     
-        context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);        
+        context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);
         context.fillStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
         context.fill();
       }else{        
@@ -61,7 +61,7 @@ app.main = (function() {
         context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.1)';
         context.stroke();
       }
-      context.closePath();  
+      context.closePath();
 
       // localUsers[user] = {
       //   prevX: data[user]['pos']['x'],
