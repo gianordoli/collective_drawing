@@ -113,21 +113,13 @@ function updateUserPosition(id, data){
     // console.log('out:\t' + data.orientation.x);
 
     data.orientation.x = constrain(data.orientation.x, -90, 90);
-    // if(90 < data.orientation.x && data.orientation.x < 180){
-    //   data.orientation.x = 90;
-    // }else if(-180 < data.orientation.x && data.orientation.x < -90){
-    //   data.orientation.x = -90;
-    // }
     // console.log('trim:\t' + data.orientation.x);
-
-    // data.orientation.x = Math.round(map(data.orientation.x, 180, -180, -90, 90));
-    // console.log('map:\t' + data.orientation.x);
 
     data.orientation.x *= -1;
     data.orientation.y -= users[id]['offset']['y'];
 
     var speed = {
-      x: data.orientation.x * 0.2,
+      x: data.orientation.x * 0.1,
       y: data.orientation.y * 0.2
     }
     users[id]['pos']['x'] += speed.x;
