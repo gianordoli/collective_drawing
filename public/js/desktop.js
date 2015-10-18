@@ -40,7 +40,7 @@ app.main = (function() {
   function draw(data) {
 
     // Background
-    context.fillStyle = 'rgba(0, 0, 0, 0.02)';
+    context.fillStyle = 'rgba(0, 0, 0, 0.01)';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){      
@@ -65,7 +65,7 @@ app.main = (function() {
           context.lineWidth = 10;
           context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
         }else{        
-          context.lineWidth = 2;
+          context.lineWidth = 4;
           context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.1)';
         }
         context.stroke();
