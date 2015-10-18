@@ -122,11 +122,11 @@ function updateUserPosition(id, data){
       x: data.orientation.x * 0.1,
       y: data.orientation.y * 0.2
     }
-    users[id]['pos']['x'] += speed.x;
+    users[id]['pos']['x'] = Math.round(users[id]['pos']['x'] + speed.x);
     if(users[id]['pos']['x'] < 0){
       users[id]['pos']['x'] = 0;
     }
-    users[id]['pos']['y'] += speed.y;
+    users[id]['pos']['y'] = Math.round(users[id]['pos']['y'] + speed.y);
     if(users[id]['pos']['y'] < 0){
       users[id]['pos']['y'] = 0;
     }    

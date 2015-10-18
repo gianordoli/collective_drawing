@@ -43,7 +43,7 @@ app.main = (function() {
 
     for(var user in data){
       console.log('currX: ' + data[user]['pos']['x']);
-      // console.log('prevX: ' + localUsers[user]['prevX']);
+      console.log('prevX: ' + localUsers[user]['prevX']);
       // console.log(data[user]['color']);
       console.log(localUsers);
 
