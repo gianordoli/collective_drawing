@@ -46,29 +46,27 @@ app.main = (function() {
       // console.log(data[user]['color']);
 
       // Circle
-
+      context.beginPath();
       if(data[user]['isDrawing']){
-        context.lineWidth = 5;
-        context.beginPath();
-        context.moveTo(localUsers[user]['prevX'], localUsers[user]['prevY']);
-        context.lineTo(data[user]['pos']['x'], data[user]['pos']['y']);
-        context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
-        context.stroke();
-        context.closePath();       
-        // context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);        
-        // context.fillStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
-        // context.fill();
-      }else{
-        context.beginPath();        
+        // context.lineWidth = 5;
+        // context.moveTo(localUsers[user]['prevX'], localUsers[user]['prevY']);
+        // context.lineTo(data[user]['pos']['x'], data[user]['pos']['y']);
+        // context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
+        // context.stroke();     
+        context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 5, 0, 2*Math.PI);        
+        context.fillStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
+        context.fill();
+      }else{        
         context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 1, 0, 2*Math.PI);
         context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.1)';
         context.stroke();
       }
+      context.closePath();  
 
-      localUsers[user] = {
-        prevX: data[user]['pos']['x'],
-        prevY: data[user]['pos']['y']
-      }
+      // localUsers[user] = {
+      //   prevX: data[user]['pos']['x'],
+      //   prevY: data[user]['pos']['y']
+      // }
     }
   };
 
