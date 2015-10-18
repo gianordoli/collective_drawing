@@ -41,9 +41,7 @@ app.main = (function() {
     context.fillStyle = 'rgba(0, 0, 0, 0.01)';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    for(var user in data){
-      console.log('currX: ' + data[user]['pos']['x']);
-      
+    for(var user in data){      
       var prevX, prevY;
       if(localUsers.hasOwnProperty(user)){
         prevX = localUsers[user]['prevX'];
@@ -52,6 +50,7 @@ app.main = (function() {
         prevX = data[user]['pos']['x'];
         prevY = data[user]['pos']['y'];
       }
+      // console.log('currX: ' + data[user]['pos']['x']);
       // console.log('prevX: ' + localUsers[user]['prevX']);
       // console.log(data[user]['color']);
       // console.log(localUsers);
@@ -59,7 +58,9 @@ app.main = (function() {
       // Circle
       context.beginPath();
       if(data[user]['isDrawing']){
-        context.lineWidth = 5;
+        context.lineWidth = 10;
+        context.lineJoin = 'round';
+        context.lineCap = 'round';
         context.moveTo(prevX, prevY);
         context.lineTo(data[user]['pos']['x'], data[user]['pos']['y']);
         context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
@@ -69,8 +70,8 @@ app.main = (function() {
         // context.fill();
       }else{        
         context.arc(data[user]['pos']['x'], data[user]['pos']['y'], 1, 0, 2*Math.PI);
-        context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.1)';
-        context.stroke();
+        context.fillStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.1)';
+        context.fill();
       }
       context.closePath();
 
