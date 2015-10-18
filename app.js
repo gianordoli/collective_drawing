@@ -103,18 +103,15 @@ function updateUserPosition(id, data){
   if(users.hasOwnProperty(id)) {
     // console.log('in:\t' + data.orientation.x);
 
-    // Relative to offset
     data.orientation.x = data.orientation.x - users[id]['offset']['x'];
     // console.log('offset:\t' + users[id]['offset']['x']);
     // console.log('relative:\t' + data.orientation.x);
     
-    // Flipping
     if(data.orientation.x > 180){
       data.orientation.x -= 360;
     }
-    // console.log('flip:\t' + data.orientation.x);
+    // console.log('out:\t' + data.orientation.x);
 
-    // Trimming
     if(90 < data.orientation.x && data.orientation.x < 180){
       data.orientation.x = 90;
     }else if(-180 < data.orientation.x && data.orientation.x < -90){
@@ -125,6 +122,7 @@ function updateUserPosition(id, data){
     // data.orientation.x = Math.round(map(data.orientation.x, 180, -180, -90, 90));
     // console.log('map:\t' + data.orientation.x);
 
+    data.orientation.x *= -1;
     data.orientation.y -= users[id]['offset']['y'];
 
     var speed = {
