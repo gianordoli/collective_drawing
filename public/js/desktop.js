@@ -65,8 +65,8 @@ app.main = (function() {
           context.lineWidth = 10;
           context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
         }else{        
-          context.lineWidth = 4;
-          context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.05)';
+          context.lineWidth = 3;
+          context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.1)';
         }
         context.stroke();
       context.closePath();
