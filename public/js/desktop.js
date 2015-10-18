@@ -42,7 +42,8 @@ app.main = (function() {
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){
-      // console.log(data[user]['pos']['x']);
+      console.log('currX: ' + data[user]['pos']['x']));
+      console.log('prevX: ' + localUsers[user]['prevX']);
       // console.log(data[user]['color']);
 
       // Circle
