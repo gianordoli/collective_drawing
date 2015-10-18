@@ -43,15 +43,24 @@ app.main = (function() {
 
     for(var user in data){
       console.log('currX: ' + data[user]['pos']['x']);
-      console.log('prevX: ' + localUsers[user]['prevX']);
+      
+      var prevX, prevY;
+      if(localUsers.hasOwnProperty(user)){
+        prevX = localUsers[user]['prevX'];
+        prevY = localUsers[user]['prevY'];
+      }else{
+        prevX = data[user]['pos']['x'];
+        prevY = data[user]['pos']['y'];
+      }
+      // console.log('prevX: ' + localUsers[user]['prevX']);
       // console.log(data[user]['color']);
-      console.log(localUsers);
+      // console.log(localUsers);
 
       // Circle
       context.beginPath();
       if(data[user]['isDrawing']){
         context.lineWidth = 5;
-        context.moveTo(localUsers[user]['prevX'], localUsers[user]['prevY']);
+        context.moveTo(prevX, prevY);
         context.lineTo(data[user]['pos']['x'], data[user]['pos']['y']);
         context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
         context.stroke();     
