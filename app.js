@@ -74,7 +74,7 @@ io.on('connection', function(socket) {
 
   // Listening for coordinates
   socket.on('orientation', function(data) {
-    // console.log('SOCKET: orientation');
+    console.log('SOCKET: orientation');
     // console.log('has sent: ' + socket.id, data);
     updateUserPosition(socket.id, data);
     users[socket.id]['isDrawing'] = data.isDrawing;
@@ -136,7 +136,7 @@ function calibrateUser(id, data){
         renderOnClient(io);
       }, 20);
     }    
-  }  
+  }
 }
 
 function updateUserPosition(id, data){
@@ -153,6 +153,7 @@ function updateUserPosition(id, data){
     data.orientation.x = map(data.orientation.x,
                             users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
                             0, dimensions.width);
+    console.log(data.orientation.x);
 
     // OLD:
     // data.orientation.x -= users[id]['offset']['x'];
