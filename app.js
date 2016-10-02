@@ -52,6 +52,12 @@ io.on('connection', function(socket) {
     addUser(socket.id);
   });
 
+  // Getting dimensions
+  socket.on('dimensions', function(data){
+    console.log("SOCKET: dimensions");
+    console.log(data);
+  });
+
   // socket.on('calibrate', function(data) {
   //   console.log('SOCKET: calibrate');
   //   console.log(data);
