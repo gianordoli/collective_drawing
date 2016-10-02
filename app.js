@@ -147,7 +147,7 @@ function updateUserPosition(id, data){
   // console.log('FUNCTION: updateUser');
   // console.log(data);
   if(users.hasOwnProperty(id)) {
-    console.log('in:\t' + data.orientation.x);
+    // console.log('in:\t' + data.orientation.x);
 
     // NEW!
     if(data.orientation.x > 180) data.orientation.x -= 360;
@@ -158,7 +158,8 @@ function updateUserPosition(id, data){
     users[id]['pos']['x'] = map(data.orientation.x,
                             users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
                             0, dimensions.width);
-    console.log(users[id]['pos']['x']);
+    users[id]['pos']['x'] = Math.round(users[id]['pos']['x']);
+    // console.log(users[id]['pos']['x']);
 
     // OLD:
     // data.orientation.x -= users[id]['offset']['x'];
