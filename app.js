@@ -32,7 +32,10 @@ server.listen(PORT, function(){
 
 var users = {};
 var loop;
-var dimensions;
+var dimensions = {
+  x: "",
+  y: ""
+};
 
 //Assign function to 'connection' event for the connected socket
 io.on('connection', function(socket) {
@@ -57,7 +60,8 @@ io.on('connection', function(socket) {
   socket.on('dimensions', function(data){
     console.log("SOCKET: dimensions");
     console.log(data);
-    dimensions = data;
+    dimensions["x"] = data["width"];
+    dimensions["y"] = data["height"];
   });
 
   // socket.on('calibrate', function(data) {
@@ -176,7 +180,7 @@ function angleToPosition(id, angle, axis){
 
   users[id]['pos'][axis] = map(angle,
                           users[id]['offset'][axis]["min"], users[id]['offset'][axis]["max"],
-                          0, dimensions.width);
+                          0, dimensions["axis"]);
   users[id]['pos'][axis] = Math.round(users[id]['pos'][axis]);
   console.log(axis, users[id]['pos'][axis]);
 }
