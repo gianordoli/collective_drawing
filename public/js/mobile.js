@@ -65,7 +65,7 @@ app.main = (function() {
 
   function calibrate(){
     touches ++;
-     // 1: center, 2: left, 3: right, 4: top, 5: bottom
+     // 1: center, 2: left, 3: right, 4: bottom, 5: top
     if(touches === 1) {
       console.log("started calibrating...");
     }else if(touches === 2) {
@@ -77,7 +77,7 @@ app.main = (function() {
     }else if(touches === 5) {
       calibration["beta"]["max"] = orientation.y;
       socket.emit('new-calibration', calibration);
-      // isCalibrated = true;
+      isCalibrated = true;
     }        
   }
 
