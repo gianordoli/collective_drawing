@@ -32,6 +32,7 @@ server.listen(PORT, function(){
 
 var users = {};
 var loop;
+var dimensions;
 
 //Assign function to 'connection' event for the connected socket
 io.on('connection', function(socket) {
@@ -56,6 +57,7 @@ io.on('connection', function(socket) {
   socket.on('dimensions', function(data){
     console.log("SOCKET: dimensions");
     console.log(data);
+    dimensions = data;
   });
 
   // socket.on('calibrate', function(data) {
@@ -93,16 +95,41 @@ function renderOnClient(io){
   io.sockets.emit('render', users);
 }
 
+// function calibrateUser(id, data){
+//   console.log('FUNCTION: calibrateUser');
+//   if(data.x > 180){
+//     data.x -= 360;
+//   }  
+//   if(users.hasOwnProperty(id)){
+//     users[id]['offset'] = {
+//       x: data.x,
+//       y: data.y
+//     }
+//     if(Object.keys(users).length === 1){
+//       loop = setInterval(function(){
+//         renderOnClient(io);
+//       }, 20);
+//     }    
+//   }  
+// }
+
 function calibrateUser(id, data){
   console.log('FUNCTION: calibrateUser');
   if(data.x > 180){
     data.x -= 360;
   }  
   if(users.hasOwnProperty(id)){
-    users[id]['offset'] = {
-      x: data.x,
-      y: data.y
-    }
+      users[id]['offset'] = {
+        x: {
+          min: data["alpha"]["min"],
+          min: data["alpha"]["max"]
+        },
+        y: data.y
+      }    
+    // users[id]['offset'] = {
+    //   x: data.x,
+    //   y: data.y
+    // }
     if(Object.keys(users).length === 1){
       loop = setInterval(function(){
         renderOnClient(io);
@@ -116,29 +143,34 @@ function updateUserPosition(id, data){
   if(users.hasOwnProperty(id)) {
     // console.log('in:\t' + data.orientation.x);
 
-    data.orientation.x -= users[id]['offset']['x'];
-    // console.log('offset:\t' + users[id]['offset']['x']);
-    // console.log('relative:\t' + data.orientation.x);
-    
     if(data.orientation.x > 180){
       data.orientation.x -= 360;
     }
+
+    // NEW!
+    data.orientation.x = constrain(data.orientation.x, users[id]['offset']['x']["min"], users[id]['offset']['x']["max"]);
+    data.orientation.x = map(data.orientation.x,
+                            users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
+                            0, dimensions.width);
+
+    // OLD:
+    // data.orientation.x -= users[id]['offset']['x'];
+    // console.log('offset:\t' + users[id]['offset']['x']);
+    // console.log('relative:\t' + data.orientation.x);
     // console.log('out:\t' + data.orientation.x);
-
-    data.orientation.x = constrain(data.orientation.x, -90, 90);
+    // data.orientation.x = constrain(data.orientation.x, -90, 90);
     // console.log('trim:\t' + data.orientation.x);
-
-    data.orientation.x *= -1;
+    // data.orientation.x *= -1;
     data.orientation.y -= users[id]['offset']['y'];
 
     var speed = {
       x: data.orientation.x * 0.2,
       y: data.orientation.y * 0.2
     }
-    users[id]['pos']['x'] = Math.round(users[id]['pos']['x'] + speed.x);
-    if(users[id]['pos']['x'] < 0){
-      users[id]['pos']['x'] = 0;
-    }
+    // users[id]['pos']['x'] = Math.round(users[id]['pos']['x'] + speed.x);
+    // if(users[id]['pos']['x'] < 0){
+    //   users[id]['pos']['x'] = 0;
+    // }
     users[id]['pos']['y'] = Math.round(users[id]['pos']['y'] + speed.y);
     if(users[id]['pos']['y'] < 0){
       users[id]['pos']['y'] = 0;
