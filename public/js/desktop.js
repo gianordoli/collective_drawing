@@ -70,7 +70,9 @@ app.main = (function() {
         context.moveTo(prevX, prevY);
         context.lineTo(data[user]['pos']['x'], data[user]['pos']['y']);      
         if(data[user]['isDrawing']){
-          context.lineWidth = 10;
+          
+          // FIRE!
+          context.lineWidth = 30;
           context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
         }else{        
           context.lineWidth = 3;
