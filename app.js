@@ -52,11 +52,16 @@ io.on('connection', function(socket) {
     addUser(socket.id);
   });
 
-  socket.on('calibrate', function(data) {
-    console.log('SOCKET: calibrate');
+  // socket.on('calibrate', function(data) {
+  //   console.log('SOCKET: calibrate');
+  //   console.log(data);
+  //   calibrateUser(socket.id, data);
+  // });
+
+  socket.on("new-calibration", function(data){
+    console.log("New calibration.");
     console.log(data);
-    calibrateUser(socket.id, data);
-  });  
+  });
 
   // Listening for coordinates
   socket.on('orientation', function(data) {

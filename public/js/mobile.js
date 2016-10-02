@@ -23,9 +23,10 @@ app.main = (function() {
 
     $('#calibrate-bt').off('click').on('click', function(){
       console.log('calibrate');
-      socket.emit('calibrate', orientation);
-      isCalibrated = true;
-      $('#calibrate-bt').remove();
+      calibrate();
+      // socket.emit('calibrate', orientation);
+      // isCalibrated = true;
+      // $('#calibrate-bt').remove();
     });
 
     var el = document.getElementById('cube');
@@ -48,6 +49,27 @@ app.main = (function() {
         }
       });
     }
+  };
+
+  var touches = 0;
+  var calibration = {
+    alpha: {
+      min: "",
+      max: ""
+    }
+  }
+
+  function calibrate(){
+    touches ++;
+     // 1: center, 2: left, 3: right
+    if(touches === 1) { console.log("started calibrating..."); };
+    if(touches === 2) {
+      calibration["alpha"]["min"] = orientation.x;
+    }
+    if(touches === 3) {
+      calibration["alpha"]["max"] = orientation.x;
+      socket.emit('new-calibration', calibration);
+    }    
   }
 
   function handleStart(evt) {
