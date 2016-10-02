@@ -21,13 +21,13 @@ app.main = (function() {
     });
 
     socket.on('render', function(data) {
-      // console.log(data);
+      console.log(data);
       draw(data);
     });
 
-    socket.on('debug', function(data) {
-      console.log(data);
-    });
+    // socket.on('debug', function(data) {
+    //   console.log(data);
+    // });
   };
 
   var canvasSetup = function(){
