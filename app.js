@@ -147,7 +147,7 @@ function updateUserPosition(id, data){
     if(data.orientation.x > 180){
       data.orientation.x -= 360;
     }
-    // console.log(users[id]["offset"]["x"]);
+    console.log(users[id]["offset"]["x"]);
     // NEW!
     data.orientation.x = map(data.orientation.x,
                             users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
