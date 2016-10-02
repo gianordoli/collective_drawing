@@ -179,12 +179,16 @@ function angleToPosition(id, angle, axis){
   if(angle > users[id]['offset'][axis]["min"]) angle = users[id]['offset'][axis]["min"];
   if(angle < users[id]['offset'][axis]["max"]) angle = users[id]['offset'][axis]["max"];
 
-  users[id]['pos'][axis] = map(angle,
-                          users[id]['offset'][axis]["min"], users[id]['offset'][axis]["max"],
-                          0, dimensions[axis]);
+  if(axis === "x"){
+    users[id]['pos'][axis] = map(angle,
+                            users[id]['offset'][axis]["min"], users[id]['offset'][axis]["max"],
+                            0, dimensions[axis]);
+  }else{
+    users[id]['pos'][axis] = map(angle,
+                            users[id]['offset'][axis]["min"], users[id]['offset'][axis]["max"],
+                            dimensions[axis], 0); // y is inverted :/
+  }
   users[id]['pos'][axis] = Math.round(users[id]['pos'][axis]);
-
-  if(axis === "y") users[id]['pos'][axis] *= -1;
   
   console.log(axis, users[id]['pos'][axis]);
 }
