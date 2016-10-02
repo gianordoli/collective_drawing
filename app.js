@@ -151,7 +151,7 @@ function updateUserPosition(id, data){
     // NEW!
     users[id]['pos']['x'] = map(data.orientation.x,
                             users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
-                            0, dimensions.width);
+                            dimensions.width, 0);
     users[id]['pos']['x'] = constrain(users[id]['pos']['x'], users[id]['offset']['x']["min"], users[id]['offset']['x']["max"]);
     console.log(users[id]['pos']['x']);
 
