@@ -70,7 +70,7 @@ app.main = (function() {
       events: {
         beta: event.beta,
         alpha: event.alpha,
-        gama: event.game,
+        gama: event.gama,
         absolute: event.absolute
       }
     };
