@@ -69,6 +69,7 @@ io.on('connection', function(socket) {
   socket.on("new-calibration", function(data){
     console.log("New calibration.");
     console.log(data);
+    calibrateUser(socket.id, data);
   });
 
   // Listening for coordinates
