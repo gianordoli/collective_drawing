@@ -139,6 +139,7 @@ function calibrateUser(id, data){
           max: data["beta"]["max"]
         }
       };
+    console.log(users[id]['offset']);
     // users[id]['offset'] = {
     //   x: data.x,
     //   y: data.y

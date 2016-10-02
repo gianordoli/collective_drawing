@@ -77,7 +77,7 @@ app.main = (function() {
     }else if(touches === 5) {
       calibration["beta"]["max"] = orientation.y;
       socket.emit('new-calibration', calibration);
-      isCalibrated = true;
+      // isCalibrated = true;
     }        
   }
 
