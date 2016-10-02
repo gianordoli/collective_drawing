@@ -89,7 +89,7 @@ io.on('connection', function(socket) {
   });
 });
 
-function renderOnClient(io){
+function renderOnClient(){
   // console.log('FUNCTION: renderOnClient');
   // Emit coordinates to every clients (all players)
   io.sockets.emit('render', users);
@@ -134,11 +134,12 @@ function calibrateUser(id, data){
     //   x: data.x,
     //   y: data.y
     // }
-    if(Object.keys(users).length === 1){
-      loop = setInterval(function(){
-        renderOnClient(io);
-      }, 20);
-    }    
+
+    // if(Object.keys(users).length === 1){
+    //   loop = setInterval(function(){
+    //     renderOnClient(io);
+    //   }, 20);
+    // }    
   }
 }
 
@@ -180,7 +181,9 @@ function updateUserPosition(id, data){
     users[id]['pos']['y'] = Math.round(users[id]['pos']['y'] + speed.y);
     if(users[id]['pos']['y'] < 0){
       users[id]['pos']['y'] = 0;
-    }    
+    }
+
+    renderOnClient();
   }
 }
 
