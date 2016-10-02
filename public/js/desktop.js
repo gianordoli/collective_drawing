@@ -20,6 +20,10 @@ app.main = (function() {
       // console.log(data);
       draw(data);
     });
+    
+    socket.on('debug', function(data) {
+      console.log(data);
+    });
   };
 
   var canvasSetup = function(){

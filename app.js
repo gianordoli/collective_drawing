@@ -64,6 +64,8 @@ io.on('connection', function(socket) {
     // console.log('has sent: ' + socket.id, data);
     updateUserPosition(socket.id, data);
     users[socket.id]['isDrawing'] = data.isDrawing;
+
+    io.sockets.emit('debug', data.orientation.events);
   });
   
   socket.on('disconnect', function() {

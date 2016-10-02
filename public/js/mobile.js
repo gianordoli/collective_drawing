@@ -65,7 +65,15 @@ app.main = (function() {
   var getOrientation = function(){
     var tiltFrontToBack = Math.round(event.beta);
     var direction = Math.round(event.alpha);
-    return {x: direction, y: -tiltFrontToBack};
+    return {
+      x: direction, y: -tiltFrontToBack,
+      events: {
+        beta: event.beta,
+        alpha: event.alpha,
+        gama: event.game,
+        absolute: event.absolute
+      }
+    };
   }
 
   var emitOrientation = function(){
