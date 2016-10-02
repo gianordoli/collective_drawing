@@ -151,7 +151,7 @@ function updateUserPosition(id, data){
     // NEW!
     users[id]['pos']['x'] = map(data.orientation.x,
                             users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
-                            dimensions.width, 0);
+                            0, dimensions.width);
     users[id]['pos']['x'] = constrain(users[id]['pos']['x'], users[id]['offset']['x']["min"], users[id]['offset']['x']["max"]);
     console.log(users[id]['pos']['x']);
 
@@ -212,6 +212,7 @@ function removeUser(id) {
 var map = function (n, start1, stop1, start2, stop2) {
   return (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
 };
-var constrain = function (n, low, high) {
-  return Math.max(Math.min(n, high), low);
+
+var constrain = function(num, min, max) {
+  return Math.min(Math.max(num, min), max);
 };
