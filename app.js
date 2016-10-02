@@ -75,10 +75,10 @@ io.on('connection', function(socket) {
   // Listening for coordinates
   socket.on('orientation', function(data) {
     console.log('SOCKET: orientation');
-    console.log('has sent: ' + socket.id, data);
+    // console.log('has sent: ' + socket.id, data);
     updateUserPosition(socket.id, data);
     users[socket.id]['isDrawing'] = data.isDrawing;
-    io.sockets.emit('debug', data.orientation.events);
+    // io.sockets.emit('debug', data.orientation.events);
   });
   
   socket.on('disconnect', function() {
@@ -153,7 +153,7 @@ function updateUserPosition(id, data){
     data.orientation.x = map(data.orientation.x,
                             users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
                             0, dimensions.width);
-    // console.log(data.orientation.x);
+    console.log(data.orientation.x);
 
     // OLD:
     // data.orientation.x -= users[id]['offset']['x'];
