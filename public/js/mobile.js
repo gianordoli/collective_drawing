@@ -86,16 +86,12 @@ app.main = (function() {
   };
 
   var getOrientation = function(){
-    var tiltFrontToBack = Math.round(event.beta);
-    var direction = Math.round(event.alpha);
+    // var tiltFrontToBack = Math.round(event.beta);
+    // var direction = Math.round(event.alpha);
+    var tiltFrontToBack = event.beta;
+    var direction = event.alpha;
     return {
-      x: direction, y: -tiltFrontToBack,
-      events: {
-        beta: Math.round(event.beta*1000),
-        alpha: Math.round(event.alpha*1000)
-        // gama: event.gama,
-        // absolute: event.absolute
-      }
+      x: direction, y: -tiltFrontToBack
     };
   }
 
