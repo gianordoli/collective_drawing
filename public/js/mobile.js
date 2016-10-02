@@ -56,21 +56,29 @@ app.main = (function() {
     alpha: {
       min: "",
       max: ""
-    }
+    },
+    beta: {
+      min: "",
+      max: ""
+    }    
   }
 
   function calibrate(){
     touches ++;
-     // 1: center, 2: left, 3: right
-    if(touches === 1) { console.log("started calibrating..."); };
-    if(touches === 2) {
+     // 1: center, 2: left, 3: right, 4: top, 5: bottom
+    if(touches === 1) {
+      console.log("started calibrating...");
+    }else if(touches === 2) {
       calibration["alpha"]["min"] = orientation.x;
-    }
-    if(touches === 3) {
+    }else if(touches === 3) {
       calibration["alpha"]["max"] = orientation.x;
+    }else if(touches === 4) {
+      calibration["beta"]["min"] = orientation.y;
+    }else if(touches === 5) {
+      calibration["beta"]["max"] = orientation.y;
       socket.emit('new-calibration', calibration);
       isCalibrated = true;
-    }    
+    }        
   }
 
   function handleStart(evt) {

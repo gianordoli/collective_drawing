@@ -128,7 +128,10 @@ function calibrateUser(id, data){
           min: data["alpha"]["min"],
           max: data["alpha"]["max"]
         },
-        y: data.y
+        y: {
+          min: data["beta"]["min"],
+          max: data["beta"]["max"]          
+        }
       }
     // users[id]['offset'] = {
     //   x: data.x,
@@ -148,6 +151,7 @@ function updateUserPosition(id, data){
   // console.log(data);
   if(users.hasOwnProperty(id)) {
     // console.log('in:\t' + data.orientation.x);
+    console.log('in:\t' + data.orientation.y);
 
     // NEW!
     if(data.orientation.x > 180) data.orientation.x -= 360;
