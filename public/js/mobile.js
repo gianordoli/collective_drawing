@@ -68,10 +68,10 @@ app.main = (function() {
     return {
       x: direction, y: -tiltFrontToBack,
       events: {
-        beta: event.beta,
-        alpha: event.alpha,
-        gama: event.gama,
-        absolute: event.absolute
+        beta: Math.round(event.beta*1000),
+        alpha: Math.round(event.alpha*1000)
+        // gama: event.gama,
+        // absolute: event.absolute
       }
     };
   }
