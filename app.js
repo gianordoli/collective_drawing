@@ -125,7 +125,7 @@ function calibrateUser(id, data){
           min: data["alpha"]["max"]
         },
         y: data.y
-      }    
+      }
     // users[id]['offset'] = {
     //   x: data.x,
     //   y: data.y
@@ -147,13 +147,13 @@ function updateUserPosition(id, data){
     if(data.orientation.x > 180){
       data.orientation.x -= 360;
     }
-
+    console.log(users[id]["offset"]["x"]);
     // NEW!
     data.orientation.x = constrain(data.orientation.x, users[id]['offset']['x']["min"], users[id]['offset']['x']["max"]);
     data.orientation.x = map(data.orientation.x,
                             users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
                             0, dimensions.width);
-    console.log(data.orientation.x);
+    // console.log(data.orientation.x);
 
     // OLD:
     // data.orientation.x -= users[id]['offset']['x'];
