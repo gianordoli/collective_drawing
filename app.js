@@ -122,7 +122,7 @@ function calibrateUser(id, data){
       users[id]['offset'] = {
         x: {
           min: data["alpha"]["min"],
-          min: data["alpha"]["max"]
+          max: data["alpha"]["max"]
         },
         y: data.y
       }
@@ -139,21 +139,21 @@ function calibrateUser(id, data){
 }
 
 function updateUserPosition(id, data){
-  console.log('FUNCTION: updateUser');
-  console.log(data);
+  // console.log('FUNCTION: updateUser');
+  // console.log(data);
   if(users.hasOwnProperty(id)) {
     // console.log('in:\t' + data.orientation.x);
 
     if(data.orientation.x > 180){
       data.orientation.x -= 360;
     }
-    console.log(users[id]["offset"]["x"]);
+    // console.log(users[id]["offset"]["x"]);
     // NEW!
-    data.orientation.x = constrain(data.orientation.x, users[id]['offset']['x']["min"], users[id]['offset']['x']["max"]);
     data.orientation.x = map(data.orientation.x,
                             users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
                             0, dimensions.width);
-    // console.log(data.orientation.x);
+    data.orientation.x = constrain(data.orientation.x, users[id]['offset']['x']["min"], users[id]['offset']['x']["max"]);    
+    console.log(data.orientation.x);
 
     // OLD:
     // data.orientation.x -= users[id]['offset']['x'];
