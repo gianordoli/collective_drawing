@@ -119,8 +119,10 @@ function calibrateUser(id, data){
   //   data.x -= 360;
   // }
   // console.log()
-  if(data["alpha"]["min"] > 180) data["alpha"]["min"] -= 360;
-  if(data["alpha"]["max"] > 180) data["alpha"]["max"] -= 360;
+  data["alpha"]["min"] = fixAngle(data["alpha"]["min"]);
+  data["alpha"]["max"] = fixAngle(data["alpha"]["max"]);
+  data["beta"]["min"] = fixAngle(data["beta"]["min"]);
+  data["beta"]["max"] = fixAngle(data["beta"]["max"]);
   
   if(users.hasOwnProperty(id)){
       users[id]['offset'] = {
@@ -130,9 +132,9 @@ function calibrateUser(id, data){
         },
         y: {
           min: data["beta"]["min"],
-          max: data["beta"]["max"]          
+          max: data["beta"]["max"]
         }
-      }
+      };
     // users[id]['offset'] = {
     //   x: data.x,
     //   y: data.y
@@ -146,6 +148,12 @@ function calibrateUser(id, data){
   }
 }
 
+function fixAngle(angle){
+  var fixedAngle = angle;
+  if(fixedAngle > 180) fixedAngle -= 360;
+  return fixedAngle;
+}
+
 function updateUserPosition(id, data){
   // console.log('FUNCTION: updateUser');
   // console.log(data);
@@ -153,43 +161,23 @@ function updateUserPosition(id, data){
     // console.log('in:\t' + data.orientation.x);
     console.log('in:\t' + data.orientation.y);
 
-    // NEW!
-    if(data.orientation.x > 180) data.orientation.x -= 360;
-    // Clamping
-    if(data.orientation.x > users[id]['offset']['x']["min"]) data.orientation.x = users[id]['offset']['x']["min"];
-    if(data.orientation.x < users[id]['offset']['x']["max"]) data.orientation.x = users[id]['offset']['x']["max"];
-
-    users[id]['pos']['x'] = map(data.orientation.x,
-                            users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
-                            0, dimensions.width);
-    users[id]['pos']['x'] = Math.round(users[id]['pos']['x']);
-    // console.log(users[id]['pos']['x']);
-
-    // OLD:
-    // data.orientation.x -= users[id]['offset']['x'];
-    // console.log('offset:\t' + users[id]['offset']['x']);
-    // console.log('relative:\t' + data.orientation.x);
-    // console.log('out:\t' + data.orientation.x);
-    // data.orientation.x = constrain(data.orientation.x, -90, 90);
-    // console.log('trim:\t' + data.orientation.x);
-    // data.orientation.x *= -1;
-    // data.orientation.y -= users[id]['offset']['y'];
-
-    var speed = {
-      x: data.orientation.x * 0.2,
-      y: data.orientation.y * 0.2
-    }
-    // users[id]['pos']['x'] = Math.round(users[id]['pos']['x'] + speed.x);
-    // if(users[id]['pos']['x'] < 0){
-    //   users[id]['pos']['x'] = 0;
-    // }
-    users[id]['pos']['y'] = Math.round(users[id]['pos']['y'] + speed.y);
-    if(users[id]['pos']['y'] < 0){
-      users[id]['pos']['y'] = 0;
-    }
+    angleToPosition(id, data.orientation.x, "x");
+    angleToPosition(id, data.orientation.y, "y");
 
     renderOnClient();
   }
+}
+
+function angleToPosition(id, angle, axis){
+  angle = fixAngle(angle);
+  // Clamping
+  if(angle > users[id]['offset'][axis]["min"]) angle = users[id]['offset'][axis]["min"];
+  if(angle < users[id]['offset'][axis]["max"]) angle = users[id]['offset'][axis]["max"];
+
+  users[id]['pos'][axis] = map(angle,
+                          users[id]['offset'][axis]["min"], users[id]['offset'][axis]["max"],
+                          0, dimensions.width);
+  users[id]['pos'][axis] = Math.round(users[id]['pos'][axis]);
 }
 
 function addUser(id) {
