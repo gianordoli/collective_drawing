@@ -69,6 +69,7 @@ app.main = (function() {
     if(touches === 3) {
       calibration["alpha"]["max"] = orientation.x;
       socket.emit('new-calibration', calibration);
+      isCalibrated = true;
     }    
   }
 
