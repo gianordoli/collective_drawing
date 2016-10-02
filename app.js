@@ -118,8 +118,9 @@ function calibrateUser(id, data){
   // if(data.x > 180){
   //   data.x -= 360;
   // }
-  if(data["alpha"]["min"] > 180) data["alpha"]["min"] -= 360;
-  if(data["alpha"]["max"] > 180) data["alpha"]["max"] -= 360;
+  // console.log()
+  // if(data["alpha"]["min"] > 180) data["alpha"]["min"] -= 360;
+  // if(data["alpha"]["max"] > 180) data["alpha"]["max"] -= 360;
   
   if(users.hasOwnProperty(id)){
       users[id]['offset'] = {
