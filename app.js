@@ -149,11 +149,11 @@ function updateUserPosition(id, data){
     }
     console.log(users[id]["offset"]["x"]);
     // NEW!
-    data.orientation.x = map(data.orientation.x,
+    users[id]['pos']['x'] = map(data.orientation.x,
                             users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
-                            0, dimensions.width);
-    data.orientation.x = constrain(data.orientation.x, users[id]['offset']['x']["min"], users[id]['offset']['x']["max"]);    
-    console.log(data.orientation.x);
+                            dimensions.width, 0);
+    users[id]['pos']['x'] = constrain(users[id]['pos']['x'], users[id]['offset']['x']["min"], users[id]['offset']['x']["max"]);
+    console.log(users[id]['pos']['x']);
 
     // OLD:
     // data.orientation.x -= users[id]['offset']['x'];
