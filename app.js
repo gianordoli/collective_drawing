@@ -145,14 +145,14 @@ function updateUserPosition(id, data){
   // console.log('FUNCTION: updateUser');
   // console.log(data);
   if(users.hasOwnProperty(id)) {
-    // console.log('in:\t' + data.orientation.x);
+    console.log('in:\t' + data.orientation.x);
 
     console.log(users[id]["offset"]["x"]);
     // NEW!
     users[id]['pos']['x'] = map(data.orientation.x,
                             users[id]['offset']['x']["min"], users[id]['offset']['x']["max"],
                             dimensions.width, 0);
-    users[id]['pos']['x'] = constrain(users[id]['pos']['x'], users[id]['offset']['x']["min"], users[id]['offset']['x']["max"]);
+    users[id]['pos']['x'] = constrain(users[id]['pos']['x'], 0, dimensions.width);
     console.log(users[id]['pos']['x']);
 
     // OLD:
