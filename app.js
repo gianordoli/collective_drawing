@@ -178,6 +178,7 @@ function angleToPosition(id, angle, axis){
                           users[id]['offset'][axis]["min"], users[id]['offset'][axis]["max"],
                           0, dimensions.width);
   users[id]['pos'][axis] = Math.round(users[id]['pos'][axis]);
+  console.log(axis, users[id]['pos'][axis]);
 }
 
 function addUser(id) {
