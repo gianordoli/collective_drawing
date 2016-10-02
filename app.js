@@ -165,10 +165,10 @@ function updateUserPosition(id, data){
     // data.orientation.x *= -1;
     // data.orientation.y -= users[id]['offset']['y'];
 
-    // var speed = {
-    //   x: data.orientation.x * 0.2,
-    //   y: data.orientation.y * 0.2
-    // }
+    var speed = {
+      x: data.orientation.x * 0.2,
+      y: data.orientation.y * 0.2
+    }
     // users[id]['pos']['x'] = Math.round(users[id]['pos']['x'] + speed.x);
     // if(users[id]['pos']['x'] < 0){
     //   users[id]['pos']['x'] = 0;
