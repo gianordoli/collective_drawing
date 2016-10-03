@@ -80,6 +80,7 @@ app.main = (function() {
       isCalibrated = true;
       msg.innerHTML = "RESET";
     }else if(touches > 2){
+    	isCalibrated = false;
 			touches = 0;
 			msg.innerHTML = "TOP-LEFT";
     }
@@ -115,27 +116,27 @@ app.main = (function() {
     if(isDrawing) isDrawing = false;
   }
 
-  var displayOrientation = function(){
-    // rotate image using CSS3 transform
-    var cube = document.getElementById('cube');
+  // var displayOrientation = function(){
+  //   // rotate image using CSS3 transform
+  //   var cube = document.getElementById('cube');
 
-    // gamma is the left-to-right tilt in degrees, where right is positive
-    var tiltLeftToRight = event.gamma;
-    // beta is the front-to-back tilt in degrees, where front is positive
-    var tiltFrontToBack = event.beta;
-    // alpha is the compass direction the device is facing in degrees
-    var direction = event.alpha;
+  //   // gamma is the left-to-right tilt in degrees, where right is positive
+  //   var tiltLeftToRight = event.gamma;
+  //   // beta is the front-to-back tilt in degrees, where front is positive
+  //   var tiltFrontToBack = event.beta;
+  //   // alpha is the compass direction the device is facing in degrees
+  //   var direction = event.alpha;
 
-    cube.style.webkitTransform = 'rotate(' + tiltLeftToRight + 'deg) rotate3d(1,0,0, ' + (tiltFrontToBack * -1) + 'deg)';
-    cube.style.MozTransform = 'rotate(' + tiltLeftToRight + 'deg)';
-    cube.style.transform = 'rotate(' + tiltLeftToRight + 'deg) rotate3d(1,0,0, ' + (tiltFrontToBack * -1) + 'deg)';
+  //   cube.style.webkitTransform = 'rotate(' + tiltLeftToRight + 'deg) rotate3d(1,0,0, ' + (tiltFrontToBack * -1) + 'deg)';
+  //   cube.style.MozTransform = 'rotate(' + tiltLeftToRight + 'deg)';
+  //   cube.style.transform = 'rotate(' + tiltLeftToRight + 'deg) rotate3d(1,0,0, ' + (tiltFrontToBack * -1) + 'deg)';
 
-    // // set HTML content = tilt OR direction degree (rounded to nearest integer)
-    // document.getElementById('doTiltFrontToBack').innerHTML = Math.round(tiltFrontToBack);
-    // document.getElementById('doTiltLeftToRight').innerHTML = Math.round(tiltLeftToRight);
-    // document.getElementById('doDirection').innerHTML = Math.round(direction);
-    // document.getElementById('is-absolute').innerHTML = event.absolute ? "true" : "false";
-  }
+  //   // // set HTML content = tilt OR direction degree (rounded to nearest integer)
+  //   // document.getElementById('doTiltFrontToBack').innerHTML = Math.round(tiltFrontToBack);
+  //   // document.getElementById('doTiltLeftToRight').innerHTML = Math.round(tiltLeftToRight);
+  //   // document.getElementById('doDirection').innerHTML = Math.round(direction);
+  //   // document.getElementById('is-absolute').innerHTML = event.absolute ? "true" : "false";
+  // }
 
   var init = function(){
     console.log('Initializing app.');
