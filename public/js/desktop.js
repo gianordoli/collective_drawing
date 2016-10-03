@@ -3,7 +3,7 @@ var app = app || {};
 app.main = (function() {
 
   var socket;
-  var canvas, context;
+  var canvas, ctx;
   var width, height;
   var localUsers = {};
 
@@ -32,14 +32,14 @@ app.main = (function() {
 
   var canvasSetup = function(){
     canvas = document.getElementById('maze');
-    context = canvas.getContext ('2d');
+    ctx = canvas.getContext ('2d');
     if (canvas.getContext){
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.style.width = width + 'px';
       canvas.style.height = height + 'px';
-      context.lineJoin = 'round';
-      context.lineCap = 'round';      
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';      
     }else{
       document.write ("Your browser doesn't support canvas :S");
     }
@@ -48,8 +48,8 @@ app.main = (function() {
   function draw(data) {
 
     // Background
-    context.fillStyle = 'rgba(0, 0, 0, 0.01)';
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var user in data){      
       var prevX, prevY;
@@ -66,20 +66,24 @@ app.main = (function() {
       // console.log(localUsers);
 
       // Circle
-      context.beginPath();
-        context.moveTo(prevX, prevY);
-        context.lineTo(data[user]['pos']['x'], data[user]['pos']['y']);      
+			ctx.beginPath();
+			ctx.arc(data[user]['pos']['x'], data[user]['pos']['y'], 50, 0, 2*Math.PI);
+			ctx.stroke();
+
+      ctx.beginPath();
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(data[user]['pos']['x'], data[user]['pos']['y']);      
         if(data[user]['isDrawing']){
           
           // FIRE!
-          context.lineWidth = 30;
-          context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
+          ctx.lineWidth = 30;
+          ctx.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
         }else{        
-          context.lineWidth = 3;
-          context.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.2)';
+          ctx.lineWidth = 3;
+          ctx.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.2)';
         }
-        context.stroke();
-      context.closePath();
+        ctx.stroke();
+      ctx.closePath();
 
       localUsers[user] = {
         prevX: data[user]['pos']['x'],
