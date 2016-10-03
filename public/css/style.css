@@ -11,9 +11,11 @@
             padding: 0 0.5em;
             font-size: 20px;
          }*/
-body {
-   background-color: #000;
-   color: #fff;
+body, html {
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	color: #fff;
 }
 
 p {
@@ -22,15 +24,21 @@ p {
 }
 
 #calibrate-bt{
-	display: block;
+	/*display: block;*/
+	width: 100%;
 	height: 25%;
 	background-color: blue;
 }
 
 #hit-bt{
-	display: block;
+	/*display: block;*/
+	width: 100%;
 	height: 75%;
 	background-color: red;
+}
+
+.hidden{
+	display: none;
 }
 /*
 
