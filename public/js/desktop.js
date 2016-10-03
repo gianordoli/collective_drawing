@@ -66,9 +66,9 @@ app.main = (function() {
       // console.log(localUsers);
 
       // Circle
-			ctx.beginPath();
-			ctx.arc(data[user]['pos']['x'], data[user]['pos']['y'], 50, 0, 2*Math.PI);
-			ctx.stroke();
+			// ctx.beginPath();
+			// ctx.arc(data[user]['pos']['x'], data[user]['pos']['y'], 50, 0, 2*Math.PI);
+			// ctx.stroke();
 
       ctx.beginPath();
         ctx.moveTo(prevX, prevY);
@@ -76,10 +76,10 @@ app.main = (function() {
         if(data[user]['isDrawing']){
           
           // FIRE!
-          ctx.lineWidth = 30;
+          ctx.lineWidth = 20;
           ctx.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.75)';
         }else{        
-          ctx.lineWidth = 3;
+          ctx.lineWidth = 10;
           ctx.strokeStyle = 'hsla(' + data[user]['color'] + ', 100%, 50%, 0.2)';
         }
         ctx.stroke();
