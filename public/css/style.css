@@ -22,11 +22,13 @@ p {
 }
 
 #calibrate-bt{
+	display: block;
 	height: 25%;
 	background-color: blue;
 }
 
 #hit-bt{
+	display: block;
 	height: 75%;
 	background-color: red;
 }
