@@ -29,7 +29,7 @@ app.main = (function() {
       // $('#calibrate-bt').remove();
     });
 
-    var el = document.getElementById('cube');
+    var el = document.getElementById('hit-bt');
     el.addEventListener('touchstart', handleStart, false);
     el.addEventListener('touchend', handleEnd, false);
     el.addEventListener('touchcancel', handleEnd, false);
@@ -78,8 +78,10 @@ app.main = (function() {
       calibration["beta"]["min"] = orientation.y;
       socket.emit('new-calibration', calibration);
       isCalibrated = true;
-      touches = 0;
-      msg.innerHTML = "BOTTOM-RIGHT";
+      msg.innerHTML = "RESET";
+    }else if(touches > 2){
+			touches = 0;
+			msg.innerHTML = "TOP-LEFT";
     }
   }
 
