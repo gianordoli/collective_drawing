@@ -113,7 +113,7 @@ app.main = (function() {
       orientation: orientation,
       isDrawing: isDrawing
     });
-    if(isDrawing) isDrawing = false;
+    // if(isDrawing) isDrawing = false;
   }
 
   // var displayOrientation = function(){
