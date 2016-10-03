@@ -43,7 +43,7 @@ app.main = (function() {
       //listen for event and handle DeviceOrientationEvent object
       window.addEventListener('deviceorientation', function(event) {
         orientation = getOrientation(event);
-        displayOrientation(event);
+        // displayOrientation(event);
         if(isCalibrated){
           emitOrientation();
         }
@@ -65,20 +65,22 @@ app.main = (function() {
 
   function calibrate(){
     touches ++;
-     // 1: center, 2: left, 3: right, 4: bottom, 5: top
+    isCalibrated = false;
+    var msg = document.getElementById("calibrate-msg");
+     // 0: top-left, 2: left, 3: right, 4: bottom, 5: top
     if(touches === 1) {
       console.log("started calibrating...");
-    }else if(touches === 2) {
       calibration["alpha"]["min"] = orientation.x;
-    }else if(touches === 3) {
-      calibration["alpha"]["max"] = orientation.x;
-    }else if(touches === 4) {
-      calibration["beta"]["min"] = orientation.y;
-    }else if(touches === 5) {
       calibration["beta"]["max"] = orientation.y;
+      msg.innerHTML = "BOTTOM-RIGHT";
+    }else if(touches === 2) {
+      calibration["alpha"]["max"] = orientation.x;
+      calibration["beta"]["min"] = orientation.y;
       socket.emit('new-calibration', calibration);
       isCalibrated = true;
-    }        
+      touches = 0;
+      msg.innerHTML = "BOTTOM-RIGHT";
+    }
   }
 
   function handleStart(evt) {

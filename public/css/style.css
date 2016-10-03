@@ -21,6 +21,16 @@ p {
    font-size: 24px;
 }
 
+#calibrate-bt{
+	height: 25%;
+	background-color: blue;
+}
+
+#hit-bt{
+	height: 75%;
+	background-color: red;
+}
+/*
 
  
          h1
@@ -102,4 +112,4 @@ p {
          {
             display: block;
             margin-top: 1em;
-         }
+         }*/

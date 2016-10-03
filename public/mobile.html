@@ -9,13 +9,14 @@
       <link rel="stylesheet" href="css/style.css">
    </head>
    <body>
-      <span id="do-unsupported" class="hidden">deviceorientation event not supported</span>
-      <span id="dm-unsupported" class="hidden">devicemotion event not supported</span>
-      <span id="cnc-unsupported" class="hidden">compassneedscalibration event not supported</span>
- 
-      <button id="calibrate-bt">Calibrate</button>
+	<span id="do-unsupported" class="hidden">deviceorientation event not supported</span>
+	<div id="hit-bt"></div>
+	<div id="calibrate-bt">
+		Calibrate: 
+		<span id="calibrate-msg">TOP-LEFT</span>
+	</div>
 
-      <div id="do-results">      
+      <!-- <div id="do-results">      
          <div id="cube" class="cube">
             <div class="face one">1</div>
             <div class="face two">2</div>
@@ -23,7 +24,7 @@
             <div class="face four">4</div>
             <div class="face five">5</div>
             <div class="face six">6</div>
-         </div>
+         </div> -->
 
          <!-- <div id="do-info" class="hidden">
             <p>
